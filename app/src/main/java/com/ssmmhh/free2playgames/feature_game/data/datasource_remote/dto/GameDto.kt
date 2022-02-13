@@ -39,3 +39,5 @@ fun GameDto.toGame(): Game =
         platform = this.platform,
         releaseDate = this.releaseDate,
     )
+
+fun List<GameDto>.toGameList(): List<Game> = this.map { it.toGame() }
