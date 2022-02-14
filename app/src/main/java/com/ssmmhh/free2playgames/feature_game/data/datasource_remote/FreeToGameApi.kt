@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface FreeToGameApi {
 
-    @GET("/games")
+    @GET("games")
     suspend fun getGames(): List<GameDto>
 }

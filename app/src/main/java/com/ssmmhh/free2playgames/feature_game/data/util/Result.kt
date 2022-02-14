@@ -32,3 +32,5 @@ val Result<*>.succeeded
  */
 val Result<*>.succeededAndDataIsNotNull
     get() = this is Success && data != null
+
+fun <T> Result<T>.getDataIfSucceeded(): T? = if (this is Success) this.data else null
