@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Free2PlayGames</string>
+    <string name="game_thumbnail_image">Game thumbnail image</string>
 </resources>

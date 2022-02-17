@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/img_game_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/game_thumbnail_image"
+        app:layout_constraintDimensionRatio="H,16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/thumbnail" />
+
+    <TextView
+        android:id="@+id/txt_game_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/material_on_surface_emphasis_high_type"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_game_thumbnail"
+        tools:text="Halo Infinite" />
+
+    <TextView
+        android:id="@+id/txt_game_short_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/material_on_surface_emphasis_medium"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_game_title"
+        tools:text="For the first time ever, a free-to-play Halo experience is available in the form of Halo Infinite’s multiplayer." />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_game_genre_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:cardBackgroundColor="?colorPrimary"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_game_short_description">
+
+        <TextView
+            android:id="@+id/txt_game_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?colorOnPrimary"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            tools:text="Shooter" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txt_game_platform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/material_on_surface_emphasis_medium"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_game_short_description"
+        tools:text="PC (Windows)" />
 </androidx.constraintlayout.widget.ConstraintLayout>
