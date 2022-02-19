@@ -16,24 +16,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var useCase: GetGamesUseCase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val recyclerAdapter = GameListRecyclerViewAdapter()
-        findViewById<RecyclerView>(R.id.recycler_game_list).apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(TopSpacingItemDecoration())
-            adapter = recyclerAdapter
-        }
-        runBlocking {
-            val result = useCase.invoke()
-            result.getDataIfSucceeded()?.let { data ->
-                recyclerAdapter.submitList(data)
-            }
-
-        }
     }
 }
