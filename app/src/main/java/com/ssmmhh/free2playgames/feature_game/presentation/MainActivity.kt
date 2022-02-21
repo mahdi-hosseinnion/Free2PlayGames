@@ -1,11 +1,13 @@
 package com.ssmmhh.free2playgames.feature_game.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.feature_game.data.util.getDataIfSucceeded
+import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGameDetailByIdUseCase
 import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGamesUseCase
 import com.ssmmhh.free2playgames.feature_game.presentation.games.GameListRecyclerViewAdapter
 import com.ssmmhh.free2playgames.feature_game.presentation.util.TopSpacingItemDecoration
@@ -16,8 +18,22 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = "MainActivity"
+
+    @Inject
+    lateinit var useCase: GetGameDetailByIdUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        runBlocking {
+            val gameDetail = useCase.invoke(515)
+            Log.d(
+                TAG,
+                "onCreate: The detail of game with id: 515 is: \n${
+                    gameDetail.getDataIfSucceeded().toString()
+                } "
+            )
+        }
     }
 }
