@@ -63,6 +63,8 @@ dependencies {
     // Navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    // Swipe refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
 
     //** Test dependencies
     testImplementation "junit:junit:$junit_version"

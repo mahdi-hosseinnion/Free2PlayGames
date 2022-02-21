@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Free2PlayGames</string>
     <string name="game_thumbnail_image">Game thumbnail image</string>
+    <string name="menu_refresh">refresh list</string>
 </resources>

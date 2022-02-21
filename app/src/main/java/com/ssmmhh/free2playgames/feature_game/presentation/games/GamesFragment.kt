@@ -2,6 +2,7 @@ package com.ssmmhh.free2playgames.feature_game.presentation.games
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.FragmentGamesBinding
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +39,27 @@ class GamesFragment
         return binding.root
     }
 
+    /*
+     * Listen for option item selections so that we receive a notification
+     * when the user requests a refresh by selecting the refresh action bar item.
+     * This is for users with accessibility needs so they could manually update game list too.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // Check if user triggered a refresh:
+            R.id.menu_refresh -> {
+                // Signal SwipeRefreshLayout to start the progress indicator
+                binding.swipeRefreshGameList.isRefreshing = true
+                // Start the refresh background task.
+                viewModel.refreshGames()
+
+                return true
+            }
+        }
+        // User didn't trigger a refresh, let the superclass handle this action
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
@@ -46,6 +69,7 @@ class GamesFragment
 
     private fun setupUI() {
         setupRecyclerView()
+        setupSwipeToRefreshLayout()
     }
 
     private fun setupRecyclerView() {
@@ -53,6 +77,15 @@ class GamesFragment
             layoutManager = LinearLayoutManager(this@GamesFragment.requireContext())
             adapter = gamesRecyclerViewAdapter
         }
+    }
+
+    private fun setupSwipeToRefreshLayout() {
+        binding.swipeRefreshGameList.setOnRefreshListener {
+            viewModel.refreshGames()
+            //hide error textView and its error
+            binding.txtGameListError.visibility = View.GONE
+        }
+
     }
 
     private fun subscribeCollectors() {
@@ -72,11 +105,8 @@ class GamesFragment
             gamesRecyclerViewAdapter.submitList(vs.games)
         }
         //handle loading
-        binding.prgGameList.visibility = if (vs.isLoading) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
+        binding.swipeRefreshGameList.isRefreshing = vs.isLoading
+
         //handle error
         if (!vs.errorMessage.isNullOrBlank()) {
             binding.txtGameListError.visibility = View.VISIBLE
