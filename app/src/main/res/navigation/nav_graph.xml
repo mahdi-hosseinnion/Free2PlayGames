@@ -7,5 +7,19 @@
     <fragment
         android:id="@+id/gamesFragment"
         android:name="com.ssmmhh.free2playgames.feature_game.presentation.games.GamesFragment"
-        android:label="GamesFragment" />
+        android:label="GamesFragment" >
+
+        <action
+            android:id="@+id/action_gamesFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.ssmmhh.free2playgames.feature_game.presentation.game_detail.GameDetailFragment"
+        android:label="GameDetailFragment" >
+        <argument
+            android:name="gameId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

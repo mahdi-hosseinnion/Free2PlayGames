@@ -6,15 +6,15 @@ import com.ssmmhh.free2playgames.feature_game.domain.model.SystemRequirements
 
 data class SystemRequirementsDto(
     @SerializedName("os")
-    val os: String,
+    val os: String?,
     @SerializedName("processor")
-    val processor: String,
+    val processor: String?,
     @SerializedName("memory")
-    val memory: String,
+    val memory: String?,
     @SerializedName("graphics")
-    val graphics: String,
+    val graphics: String?,
     @SerializedName("storage")
-    val storage: String
+    val storage: String?
 )
 
 fun SystemRequirementsDto.toSystemRequirements(): SystemRequirements = SystemRequirements(
