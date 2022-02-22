@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 class GameDetailFragment : Fragment() {
 
     private val viewModel by viewModels<GameDetailViewModel>()
+
     private var _binding: FragmentGameDetailBinding? = null
     private val binding get() = _binding!!
 

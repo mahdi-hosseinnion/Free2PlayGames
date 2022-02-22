@@ -2,4 +2,10 @@
     <string name="app_name">Free2PlayGames</string>
     <string name="game_thumbnail_image">Game thumbnail image</string>
     <string name="menu_refresh">refresh list</string>
+    <string name="game_thumbnail">Game thumbnail</string>
+    <string name="play_now">Play now</string>
+    <string name="dummy_text_description">For the first time ever, a free-to-play Halo experience is available in the form of Halo Infinite’s multiplayer. 343 Industries and Xbox Game Studios made the multiplayer version of the game available separately from the full story campaign, which is available to purchase for $60 to allow everyone to get in on the action. With the multiplayer, players can take part in two different modes: Arena and Big Team Battle. The first returns to Halo’s multiplayer roots with on-map equipment and 4-player squads. Big Team Battle allows players to mix and match weapons, vehicles and equipment to create a unique combat experience. The game also offers players the ability to customize their Spartan with cosmetic items. Of course, those with the campaign will have access to extra options. Even more can be found in the game’s battle pass which also introduces new modes and maps, as well as community-focused content.</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="minimum_system_requirements">Minimum System Requirements</string>
+    <string name="profile_page">Profile page</string>
 </resources>
