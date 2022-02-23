@@ -37,7 +37,6 @@ class GamesFragment
 
     private fun setupUI() {
         //reset back to right action bar value after navigate back from detail
-        requireActivity().title = getString(R.string.app_name)
         setupRecyclerView()
         setupSwipeToRefreshLayout()
     }

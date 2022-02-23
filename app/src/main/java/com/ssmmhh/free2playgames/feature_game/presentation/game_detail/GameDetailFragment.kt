@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ssmmhh.free2playgames.R
@@ -31,13 +32,16 @@ class GameDetailFragment : Fragment() {
 
     private fun setupUi() {
         setupSwipeToRefreshLayout()
+        //set on click listener on toolbar back button
+        binding.toolbarGameDetail.setNavigationOnClickListener { findNavController().navigateUp() }
     }
 
     private fun setupSwipeToRefreshLayout() {
         binding.swipeRefreshGameDetail.setOnRefreshListener {
             viewModel.refreshGameDetail()
+            //hide error textView and its error
+            binding.txtGameDetailError.setVisibilityToGone()
         }
-
     }
 
     private fun subscribeCollectors() {
@@ -76,7 +80,7 @@ class GameDetailFragment : Fragment() {
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.imgGameThumbnail)
         //title value
-        requireActivity().title = gameDetail.title
+        binding.toolbarGameDetail.title = gameDetail.title
         //about the game
         binding.txtGameDescriptionHeader.text = "${getString(R.string.about)} ${gameDetail.title}"
         binding.txtGameDescription.text = gameDetail.description

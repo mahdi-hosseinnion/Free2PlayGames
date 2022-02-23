@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.1495" />
         <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/drawable/image_placeholder.xml" value="0.1365" />
         <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/activity_main.xml" value="0.2755208333333333" />
-        <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/fragment_game_detail.xml" value="0.2755208333333333" />
+        <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/fragment_game_detail.xml" value="0.2958612975391499" />
         <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/fragment_games.xml" value="0.2755208333333333" />
         <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/layout_additional_information_box.xml" value="0.8083140877598153" />
         <entry key="..\:/0AndroidProject/Free2PlayGames/app/src/main/res/layout/layout_text_subtext_box.xml" value="0.2755208333333333" />
