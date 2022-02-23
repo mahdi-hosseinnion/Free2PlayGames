@@ -24,10 +24,17 @@ constructor(
     val gameDetailViewState: StateFlow<GameDetailViewState> = _gameDetailViewState
 
     init {
+        getGameDetail()
+    }
+
+    fun refreshGameDetail() {
+        getGameDetail()
+    }
+
+    private fun getGameDetail() {
         getGameIdFromState()?.let {
             getGameDetailById(gameId = it)
         } ?: showUnableToRetrieveIdError()
-
     }
 
     private fun getGameIdFromState(): Int? = state.get("gameId")

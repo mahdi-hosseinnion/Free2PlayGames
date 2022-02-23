@@ -35,11 +35,7 @@ class GameDetailFragment : Fragment() {
 
     private fun setupSwipeToRefreshLayout() {
         binding.swipeRefreshGameDetail.setOnRefreshListener {
-            try {
-                Thread.sleep(1000)
-            }catch (e:Exception){}
-            //hide error textView and its error
-            binding.swipeRefreshGameDetail.isRefreshing = false
+            viewModel.refreshGameDetail()
         }
 
     }
