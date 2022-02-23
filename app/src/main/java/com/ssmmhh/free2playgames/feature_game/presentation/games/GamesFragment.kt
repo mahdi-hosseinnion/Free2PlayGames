@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,6 +17,8 @@ import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.FragmentGamesBinding
 import com.ssmmhh.free2playgames.feature_game.domain.model.Game
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
+import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToGone
+import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,6 +36,8 @@ class GamesFragment
 
 
     private fun setupUI() {
+        //reset back to right action bar value after navigate back from detail
+        requireActivity().title = getString(R.string.app_name)
         setupRecyclerView()
         setupSwipeToRefreshLayout()
     }
@@ -49,7 +53,7 @@ class GamesFragment
         binding.swipeRefreshGameList.setOnRefreshListener {
             viewModel.refreshGames()
             //hide error textView and its error
-            binding.txtGameListError.visibility = View.GONE
+            binding.txtGameListError.setVisibilityToGone()
         }
 
     }
@@ -66,8 +70,8 @@ class GamesFragment
 
     private fun handleRecyclerViewViewState(vs: GameListViewState) {
         if (vs.games.isNotEmpty()) {
-            binding.txtGameListError.visibility = View.GONE
-            binding.recyclerGameList.visibility = View.VISIBLE
+            binding.txtGameListError.setVisibilityToGone()
+            binding.recyclerGameList.setVisibilityToVisible()
             gamesRecyclerViewAdapter.submitList(vs.games)
         }
         //handle loading
@@ -75,8 +79,8 @@ class GamesFragment
 
         //handle error
         if (!vs.errorMessage.isNullOrBlank()) {
-            binding.txtGameListError.visibility = View.VISIBLE
-            binding.recyclerGameList.visibility = View.GONE
+            binding.txtGameListError.setVisibilityToVisible()
+            binding.recyclerGameList.setVisibilityToGone()
             binding.txtGameListError.text = vs.errorMessage
         }
     }

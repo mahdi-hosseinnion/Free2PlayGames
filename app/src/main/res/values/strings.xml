@@ -8,4 +8,17 @@
     <string name="additional_information">Additional Information</string>
     <string name="minimum_system_requirements">Minimum System Requirements</string>
     <string name="profile_page">Profile page</string>
+    <string name="about">About</string>
+    <string name="title">Title</string>
+    <string name="developer">Developer</string>
+    <string name="publisher">Publisher</string>
+    <string name="release_date">Release Date</string>
+    <string name="genre">Genre</string>
+    <string name="platform">Platform</string>
+    <string name="graphics">Graphics</string>
+    <string name="processor">Processor</string>
+    <string name="storage">Storage</string>
+    <string name="memory">Memory</string>
+    <string name="os">OS</string>
+    <string name="Unknown">Unknown</string>
 </resources>
