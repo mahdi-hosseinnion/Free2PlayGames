@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.FragmentGamesBinding
-import com.ssmmhh.free2playgames.feature_game.domain.model.Game
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToGone
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToVisible
@@ -25,9 +23,15 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GamesFragment
-    : Fragment(), GameListRecyclerViewAdapter.Interaction {
+    : Fragment() {
 
-    private val gamesRecyclerViewAdapter = GameListRecyclerViewAdapter(interaction = this)
+    private val gamesRecyclerViewAdapter = GameListRecyclerViewAdapter() { item, _ ->
+        //on click on recycler item
+        val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
+            gameId = item.id
+        )
+        findNavController().navigate(action)
+    }
 
     private val viewModel by viewModels<GamesViewModel>()
 
@@ -89,13 +93,6 @@ class GamesFragment
         setupUI()
         subscribeCollectors()
 
-    }
-
-    override fun onItemSelected(position: Int, item: Game) {
-        val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
-            gameId = item.id
-        )
-        findNavController().navigate(action)
     }
 
     override fun onCreateView(

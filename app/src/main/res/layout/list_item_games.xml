@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:layout_height="wrap_content">
+    android:background="?attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/img_game_thumbnail"
@@ -56,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:cardBackgroundColor="?colorPrimary"
         app:cardCornerRadius="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +67,9 @@
             android:id="@+id/txt_game_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:padding="4dp"
             android:textColor="?colorOnPrimary"
             android:textSize="16sp"
             android:textStyle="italic"
@@ -82,6 +83,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:padding="4dp"
         android:textColor="?colorPrimary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
