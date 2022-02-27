@@ -25,5 +25,10 @@
             android:name="gameId"
             android:defaultValue="-1"
             app:argType="integer" />
+        <argument
+            android:name="gameTitle"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
 </navigation>

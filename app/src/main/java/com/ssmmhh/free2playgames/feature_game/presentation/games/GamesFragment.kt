@@ -27,7 +27,8 @@ class GamesFragment : Fragment() {
     private val gamesRecyclerViewAdapter = GameListRecyclerViewAdapter() { item, _ ->
         //on click on recycler item
         val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
-            gameId = item.id
+            gameId = item.id,
+            gameTitle  = item.title
         )
         findNavController().navigate(action)
     }

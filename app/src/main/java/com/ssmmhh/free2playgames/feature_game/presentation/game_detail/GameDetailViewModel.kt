@@ -23,6 +23,9 @@ constructor(
     private val _gameDetailViewState = MutableStateFlow(GameDetailViewState(isLoading = true))
     val gameDetailViewState: StateFlow<GameDetailViewState> = _gameDetailViewState
 
+    private val _gameName = MutableStateFlow<String?>(state.get("gameTitle"))
+    val gameName: StateFlow<String?> = _gameName
+
     init {
         getGameDetail()
     }

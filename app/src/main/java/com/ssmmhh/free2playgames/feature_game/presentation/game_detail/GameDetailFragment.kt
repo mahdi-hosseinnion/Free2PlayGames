@@ -47,11 +47,25 @@ class GameDetailFragment : Fragment() {
     private fun subscribeCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.gameDetailViewState.collect {
-                    handleGameDetailViewState(it)
+                launch {
+                    viewModel.gameName.collect {
+                        it?.let {
+                            setGameNameToToolbar(it)
+                        }
+                    }
                 }
+                launch {
+                    viewModel.gameDetailViewState.collect {
+                        handleGameDetailViewState(it)
+                    }
+                }
+
             }
         }
+    }
+
+    private fun setGameNameToToolbar(gameName: String) {
+        binding.toolbarGameDetail.title = gameName
     }
 
     private fun handleGameDetailViewState(vs: GameDetailViewState) {
