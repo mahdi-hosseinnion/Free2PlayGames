@@ -1,5 +1,7 @@
 package com.ssmmhh.free2playgames.feature_game.presentation.game_detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,7 @@ class GameDetailFragment : Fragment() {
 
     private fun setupUi() {
         setupSwipeToRefreshLayout()
+        setOnclickListenersForOpenLinkButtons()
         //set on click listener on toolbar back button
         binding.toolbarGameDetail.setNavigationOnClickListener { findNavController().navigateUp() }
     }
@@ -41,6 +44,23 @@ class GameDetailFragment : Fragment() {
             viewModel.refreshGameDetail()
             //hide error textView and its error
             binding.txtGameDetailError.setVisibilityToGone()
+        }
+    }
+
+    private fun setOnclickListenersForOpenLinkButtons() {
+        binding.btnPlayNow.setOnClickListener {
+            viewModel.getGamePlayNowUrl()?.let { playNowUrl ->
+                val uri = Uri.parse(playNowUrl)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
+        }
+        binding.btnProfilePage.setOnClickListener {
+            viewModel.getGameProfileUrl()?.let { profileUrl ->
+                val uri = Uri.parse(profileUrl)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
         }
     }
 

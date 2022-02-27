@@ -68,5 +68,21 @@ constructor(
         )
     }
 
+    fun getGamePlayNowUrl(): String? {
+        gameDetailViewState.value.gameDetail?.let {
+            return it.gameUrl
+        }
+        //TODO("show unable to load get game url, when dialog error system created")
+        return null
+    }
+
+    fun getGameProfileUrl(): String? {
+        gameDetailViewState.value.gameDetail?.let {
+            return it.freeToGameProfileUrl
+        }
+        //TODO("show unable to load get game profile url, when dialog error system created")
+        return null
+    }
+
 
 }
