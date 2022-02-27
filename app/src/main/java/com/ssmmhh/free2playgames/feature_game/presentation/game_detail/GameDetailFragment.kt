@@ -34,7 +34,7 @@ class GameDetailFragment : Fragment() {
 
     private fun setupUi() {
         setupSwipeToRefreshLayout()
-        setOnclickListenersForOpenLinkButtons()
+        setupOnclickListeners()
         //set on click listener on toolbar back button
         binding.toolbarGameDetail.setNavigationOnClickListener { findNavController().navigateUp() }
     }
@@ -47,21 +47,26 @@ class GameDetailFragment : Fragment() {
         }
     }
 
-    private fun setOnclickListenersForOpenLinkButtons() {
+    private fun setupOnclickListeners() {
         binding.btnPlayNow.setOnClickListener {
             viewModel.getGamePlayNowUrl()?.let { playNowUrl ->
-                val uri = Uri.parse(playNowUrl)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                startActivity(intent)
+                openUrlInNewActivity(playNowUrl)
             }
         }
         binding.btnProfilePage.setOnClickListener {
             viewModel.getGameProfileUrl()?.let { profileUrl ->
-                val uri = Uri.parse(profileUrl)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                startActivity(intent)
+                openUrlInNewActivity(profileUrl)
             }
         }
+        binding.txtGameDescription.setOnClickListener {
+            viewModel.reverseIsGameDescriptionTextViewCollapsed()
+        }
+    }
+
+    private fun openUrlInNewActivity(url: String) {
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 
     private fun subscribeCollectors() {
@@ -72,6 +77,11 @@ class GameDetailFragment : Fragment() {
                         it?.let {
                             setGameNameToToolbar(it)
                         }
+                    }
+                }
+                launch {
+                    viewModel.isGameDescriptionTextViewCollapsed.collect {
+                        handleDescriptionTextViewCollapseState(it)
                     }
                 }
                 launch {
@@ -86,6 +96,14 @@ class GameDetailFragment : Fragment() {
 
     private fun setGameNameToToolbar(gameName: String) {
         binding.toolbarGameDetail.title = gameName
+    }
+
+    private fun handleDescriptionTextViewCollapseState(isCollapsed: Boolean) {
+        binding.txtGameDescription.maxLines = if (isCollapsed) {
+            DESCRIPTION_TEXTVIEW_COLLAPSED_MAX_LINE
+        } else {
+            Int.MAX_VALUE
+        }
     }
 
     private fun handleGameDetailViewState(vs: GameDetailViewState) {
@@ -183,6 +201,10 @@ class GameDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val DESCRIPTION_TEXTVIEW_COLLAPSED_MAX_LINE = 4
     }
 
 }

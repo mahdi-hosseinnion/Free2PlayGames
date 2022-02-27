@@ -26,12 +26,35 @@ constructor(
     private val _gameName = MutableStateFlow<String?>(state.get("gameTitle"))
     val gameName: StateFlow<String?> = _gameName
 
+    private val _isGameDescriptionTextViewCollapsed = MutableStateFlow(true)
+    val isGameDescriptionTextViewCollapsed: StateFlow<Boolean> = _isGameDescriptionTextViewCollapsed
+
     init {
         getGameDetail()
     }
 
     fun refreshGameDetail() {
         getGameDetail()
+    }
+
+    fun getGamePlayNowUrl(): String? {
+        gameDetailViewState.value.gameDetail?.let {
+            return it.gameUrl
+        }
+        //TODO("show unable to load get game url, when dialog error system created")
+        return null
+    }
+
+    fun getGameProfileUrl(): String? {
+        gameDetailViewState.value.gameDetail?.let {
+            return it.freeToGameProfileUrl
+        }
+        //TODO("show unable to load get game profile url, when dialog error system created")
+        return null
+    }
+
+    fun reverseIsGameDescriptionTextViewCollapsed() {
+        _isGameDescriptionTextViewCollapsed.value = !(_isGameDescriptionTextViewCollapsed.value)
     }
 
     private fun getGameDetail() {
@@ -66,22 +89,6 @@ constructor(
         _gameDetailViewState.value = GameDetailViewState(
             errorMessage = "Unable to retrieve id for this game! \n navigate back and try again!"
         )
-    }
-
-    fun getGamePlayNowUrl(): String? {
-        gameDetailViewState.value.gameDetail?.let {
-            return it.gameUrl
-        }
-        //TODO("show unable to load get game url, when dialog error system created")
-        return null
-    }
-
-    fun getGameProfileUrl(): String? {
-        gameDetailViewState.value.gameDetail?.let {
-            return it.freeToGameProfileUrl
-        }
-        //TODO("show unable to load get game profile url, when dialog error system created")
-        return null
     }
 
 
