@@ -18,22 +18,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
-
-    @Inject
-    lateinit var useCase: GetGameDetailByIdUseCase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        runBlocking {
-            val gameDetail = useCase.invoke(515)
-            Log.d(
-                TAG,
-                "onCreate: The detail of game with id: 515 is: \n${
-                    gameDetail.getDataIfSucceeded().toString()
-                } "
-            )
-        }
     }
 }
