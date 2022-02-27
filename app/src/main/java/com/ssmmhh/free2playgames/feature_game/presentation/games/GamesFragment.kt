@@ -22,8 +22,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GamesFragment
-    : Fragment() {
+class GamesFragment : Fragment() {
 
     private val gamesRecyclerViewAdapter = GameListRecyclerViewAdapter() { item, _ ->
         //on click on recycler item
