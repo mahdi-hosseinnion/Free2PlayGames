@@ -5,12 +5,16 @@
 نکته: هدف ایجاد این پروژه صرفا یادگیری بوده، در عین حال استفاده کاربردی از آن بلا مانع است. 
 
 </br>
-</br>
-</br>
-TODO ADD SCREEN SHOTS here
-</br>
-</br>
-</br>
+
+<p float="left" align="middle">
+  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/screenShot01.png" width="35%" height="35%" />
+  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/screenShot02.png" width="35%" height="35%"/> 
+</p>
+
+
+
+
+
 
 ### پیشنیاز ها
 * اندروید ۵ (api 21) به بالا
