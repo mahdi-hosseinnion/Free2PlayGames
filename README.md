@@ -7,8 +7,8 @@
 </br>
 
 <p float="left" align="middle">
-  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/screenShot01.png" width="35%" height="35%" />
-  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/screenShot02.png" width="35%" height="35%"/> 
+  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/main_page_screenshot.jpg" width="33%" height="33%" />
+  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/detail_page_screenshot.jpg" width="33%" height="33%"/> 
 </p>
 
 
