@@ -1,40 +1,38 @@
-# بازی های رایگان
+#Free2PlayGames
 
-لیستی از بهترین بازی های رایگان. <br />
-اطلاعات نمایش داده شده در این اپیکیشن براساس API های سایت [freetogame.com](https://www.freetogame.com)  بدست می آید. <br/>
-نکته: هدف ایجاد این پروژه صرفا یادگیری بوده، در عین حال استفاده کاربردی از آن بلا مانع است. 
+Find the best free-to-play video games!    
 
-</br>
-
-<p float="left" align="middle">
-  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/main_page_screenshot.jpg" width="33%" height="33%" />
-  <img src="https://github.com/mahdi-hosseinnion/Free2PlayGames/blob/assets/doc/screenshots/detail_page_screenshot.jpg" width="33%" height="33%"/> 
-</p>
+Source of data: [FreeToGame APIs](https://www.freetogame.com)
 
 
 
+| A list of free-to-play games  | The full details of each one them |
+| ------------- | ------------- |
+| ![game list](https://raw.githubusercontent.com/mahdi-hosseinnion/Free2PlayGames/assets/doc/screenshots/main_page_screenshot.jpg)  | ![game details](https://raw.githubusercontent.com/mahdi-hosseinnion/Free2PlayGames/assets/doc/screenshots/detail_page_screenshot.jpg)  |
 
 
+## Built with
 
-### پیشنیاز ها
-* اندروید ۵ (api 21) به بالا
+-   [Kotlin](https://kotlinlang.org/) - The programming language used
+-   Android clean architecture
+-   [Hilt](https://dagger.dev/hilt/) - Dependency injection
+-   Kotlin coroutines - Concurrency
+-   Navigation component - Navigation framework
+-   [Retrofit](https://square.github.io/retrofit/) - REST client
+-   [Glide](https://github.com/bumptech/glide) - Image loading framework
 
-## تکنولوژی ها و ابزارهای استفاده شده در توسعه این اپیکیشن
-* Programming language: [Kotlin](https://kotlinlang.org/)
-* Architecture: Android clean architecture
-* Dependency injection: [Hilt](https://dagger.dev/hilt/)
-* Concurrency: Kotlin coroutines
-* Navigation framework: Navigation component
-* REST client: [Retrofit](https://square.github.io/retrofit/)
-* Image loading framework: [Glide](https://github.com/bumptech/glide)
+### Prerequisites
 
-## توسعه دهنده
-* **مهدی حسینیون**
+Android 5 (API 21) or higher.
 
+### Download
 
-## License
+You can simply download the latest version of the app [here](https://github.com/mahdi-hosseinnion/Free2PlayGames/releases)
+
+### Contact
+
+-   **Mahdi hosseinnion** - iammahdi6724@gmail.com
+
+### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-
-
