@@ -18,6 +18,7 @@ import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.FragmentGameDetailBinding
 import com.ssmmhh.free2playgames.feature_game.domain.model.GameDetail
 import com.ssmmhh.free2playgames.feature_game.presentation.game_detail.viewstate.GameDetailViewState
+import com.ssmmhh.free2playgames.feature_game.presentation.util.TextViewCollapsingAnimation
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToGone
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,11 +33,25 @@ class GameDetailFragment : Fragment() {
     private var _binding: FragmentGameDetailBinding? = null
     private val binding get() = _binding!!
 
+    private var textViewCollapsingAnimation: TextViewCollapsingAnimation? = null
+
     private fun setupUi() {
         setupSwipeToRefreshLayout()
         setupOnclickListeners()
+        setupTextViewCollapsingAnimation()
         //set on click listener on toolbar back button
         binding.toolbarGameDetail.setNavigationOnClickListener { findNavController().navigateUp() }
+    }
+
+
+    private fun setupTextViewCollapsingAnimation() {
+        textViewCollapsingAnimation = TextViewCollapsingAnimation(
+            containerView = binding.constraintLayoutDetailContainer,
+            textView = binding.txtGameDescription,
+            isCollapsedAtInit = viewModel.isGameDescriptionTextViewCollapsed.value,
+            animationDuration = DESCRIPTION_TEXTVIEW_COLLAPSING_ANIMATION_DURATION,
+            collapsedTextViewMaxLine = DESCRIPTION_TEXTVIEW_COLLAPSED_MAX_LINE
+        )
     }
 
     private fun setupSwipeToRefreshLayout() {
@@ -99,11 +114,7 @@ class GameDetailFragment : Fragment() {
     }
 
     private fun handleDescriptionTextViewCollapseState(isCollapsed: Boolean) {
-        binding.txtGameDescription.maxLines = if (isCollapsed) {
-            DESCRIPTION_TEXTVIEW_COLLAPSED_MAX_LINE
-        } else {
-            Int.MAX_VALUE
-        }
+        textViewCollapsingAnimation?.onCollapseStateChanged(isCollapsed)
     }
 
     private fun handleGameDetailViewState(vs: GameDetailViewState) {
@@ -135,7 +146,7 @@ class GameDetailFragment : Fragment() {
         binding.toolbarGameDetail.title = gameDetail.title
         //about the game
         binding.txtGameDescriptionHeader.text = "${getString(R.string.about)} ${gameDetail.title}"
-        binding.txtGameDescription.text = gameDetail.description
+        textViewCollapsingAnimation?.updateWithNewText(gameDetail.description)
         //additional information section
         binding.gameTitleBox.titleText.text = getString(R.string.title)
         binding.gameTitleBox.subText.text = gameDetail.title
@@ -200,11 +211,13 @@ class GameDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        textViewCollapsingAnimation = null
         _binding = null
     }
 
     companion object {
         private const val DESCRIPTION_TEXTVIEW_COLLAPSED_MAX_LINE = 4
+        private const val DESCRIPTION_TEXTVIEW_COLLAPSING_ANIMATION_DURATION = 1000L
     }
 
 }
