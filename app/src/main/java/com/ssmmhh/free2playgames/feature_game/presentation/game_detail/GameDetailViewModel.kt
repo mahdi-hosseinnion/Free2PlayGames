@@ -29,6 +29,8 @@ constructor(
     private val _isGameDescriptionTextViewCollapsed = MutableStateFlow(true)
     val isGameDescriptionTextViewCollapsed: StateFlow<Boolean> = _isGameDescriptionTextViewCollapsed
 
+    private var _imageSliderPosition: Int = 0
+
     init {
         getGameDetail()
     }
@@ -56,6 +58,12 @@ constructor(
     fun reverseIsGameDescriptionTextViewCollapsed() {
         _isGameDescriptionTextViewCollapsed.value = !(_isGameDescriptionTextViewCollapsed.value)
     }
+
+    fun onImageSliderPositionChanged(newPosition: Int) {
+        _imageSliderPosition = newPosition
+    }
+
+    fun getImageSliderPosition() = _imageSliderPosition
 
     private fun getGameDetail() {
         getGameIdFromState()?.let {

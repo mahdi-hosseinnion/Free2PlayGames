@@ -54,9 +54,13 @@ class GameDetailFragment : Fragment() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
-                positionOffsetPixels: Int) {}
+                positionOffsetPixels: Int
+            ) {
+            }
 
-            override fun onPageSelected(position: Int) {}
+            override fun onPageSelected(position: Int) {
+                viewModel.onImageSliderPositionChanged(position)
+            }
 
             override fun onPageScrollStateChanged(state: Int) {
                 /** Disable swipe to refresh while user is scrolling the view pager*/
@@ -167,6 +171,13 @@ class GameDetailFragment : Fragment() {
             this.add(gameDetail.thumbnail)
             this.addAll(gameDetail.screenshots)
         })
+        //Restore image position after rotation
+        viewModel.getImageSliderPosition().let {
+            val countOfImages = gameDetail.screenshots.size.plus(1)
+            if (it < countOfImages) {
+                binding.vpgGameImages.setCurrentItem(it, false)
+            }
+        }
         //title value
         binding.toolbarGameDetail.title = gameDetail.title
         //about the game
