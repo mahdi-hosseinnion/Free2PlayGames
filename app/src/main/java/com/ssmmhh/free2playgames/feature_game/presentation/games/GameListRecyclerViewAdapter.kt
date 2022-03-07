@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.ListItemGamesBinding
 import com.ssmmhh.free2playgames.feature_game.domain.model.Game
+import com.ssmmhh.free2playgames.feature_game.presentation.util.addCircularProgressAnimationForPlaceHolder
 
 class GameListRecyclerViewAdapter(
     private val onClickOnItem: (item: Game, position: Int) -> Unit
@@ -75,7 +76,7 @@ class GameListRecyclerViewAdapter(
             //set thumbnail image
             Glide.with(binding.root)
                 .load(item.thumbnail)
-                .placeholder(R.drawable.image_placeholder)
+                .addCircularProgressAnimationForPlaceHolder(binding.root.context)
                 .error(R.drawable.no_pictures)
                 .transition(withCrossFade())
                 .into(imgGameThumbnail)

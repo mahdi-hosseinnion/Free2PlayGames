@@ -9,6 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.*
 import com.ssmmhh.free2playgames.R
+import com.ssmmhh.free2playgames.feature_game.presentation.util.addCircularProgressAnimationForPlaceHolder
 
 
 class GameDetailImagesViewPagerAdapter(
@@ -21,13 +22,12 @@ class GameDetailImagesViewPagerAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageView = ImageView(container.context).apply {
-            setBackgroundColor(Color.GREEN)
             scaleType = ImageView.ScaleType.FIT_XY
             contentDescription = container.context.getString(R.string.game_thumbnail)
         }
         Glide.with(container.context)
             .load(urlOfImages[position])
-            .placeholder(R.drawable.image_placeholder)
+            .addCircularProgressAnimationForPlaceHolder(container.context)
             .error(R.drawable.no_pictures)
             .transition(withCrossFade())
             .into(imageView)
