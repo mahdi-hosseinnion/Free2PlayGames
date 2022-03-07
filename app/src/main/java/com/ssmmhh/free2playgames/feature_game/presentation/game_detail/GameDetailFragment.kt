@@ -12,8 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import androidx.viewpager.widget.ViewPager
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.databinding.FragmentGameDetailBinding
 import com.ssmmhh.free2playgames.feature_game.domain.model.GameDetail
@@ -35,12 +34,40 @@ class GameDetailFragment : Fragment() {
 
     private var textViewCollapsingAnimation: TextViewCollapsingAnimation? = null
 
+    private lateinit var imagesViewPagerAdapter: GameDetailImagesViewPagerAdapter
+
     private fun setupUi() {
         setupSwipeToRefreshLayout()
         setupOnclickListeners()
         setupTextViewCollapsingAnimation()
+        instantiateImagesViewPager()
         //set on click listener on toolbar back button
         binding.toolbarGameDetail.setNavigationOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun instantiateImagesViewPager() {
+        imagesViewPagerAdapter = GameDetailImagesViewPagerAdapter()
+        binding.vpgGameImages.adapter = imagesViewPagerAdapter
+
+        binding.vpgGameImages.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {}
+
+            override fun onPageScrollStateChanged(state: Int) {
+                /** Disable swipe to refresh while user is scrolling the view pager*/
+                enableDisableSwipeRefresh(state == ViewPager.SCROLL_STATE_IDLE)
+            }
+        })
+
+    }
+
+    private fun enableDisableSwipeRefresh(enable: Boolean) {
+        binding.swipeRefreshGameDetail.isEnabled = enable
     }
 
 
@@ -136,12 +163,10 @@ class GameDetailFragment : Fragment() {
 
     private fun setGameDetailValuesToTextViews(gameDetail: GameDetail) {
         //set image
-        Glide.with(binding.root)
-            .load(gameDetail.thumbnail)
-            .placeholder(R.drawable.image_placeholder)
-            .error(R.drawable.no_pictures)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.imgGameThumbnail)
+        imagesViewPagerAdapter.submitNewData(buildList {
+            this.add(gameDetail.thumbnail)
+            this.addAll(gameDetail.screenshots)
+        })
         //title value
         binding.toolbarGameDetail.title = gameDetail.title
         //about the game
