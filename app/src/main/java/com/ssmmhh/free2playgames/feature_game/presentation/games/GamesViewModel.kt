@@ -2,6 +2,7 @@ package com.ssmmhh.free2playgames.feature_game.presentation.games
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ssmmhh.free2playgames.common.*
 import com.ssmmhh.free2playgames.feature_game.data.util.Result
 import com.ssmmhh.free2playgames.feature_game.domain.model.Game
 import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGamesUseCase
@@ -22,6 +23,9 @@ constructor(
     private val _gameListViewState = MutableStateFlow(GameListViewState(isLoading = true))
     val gameListViewState: StateFlow<GameListViewState> = _gameListViewState
 
+    private val _stateMessageQueue = MutableStateFlow(Queue<StateMessage>(emptyList()))
+    val stateMessageQueue: StateFlow<Queue<StateMessage>> = _stateMessageQueue
+
     init {
         getGames()
     }
@@ -30,22 +34,40 @@ constructor(
 
     private fun getGames() {
         //set is loading to true
-        _gameListViewState.value = GameListViewState(isLoading = true)
+        _gameListViewState.value = _gameListViewState.value.copy(isLoading = true)
         //retrieve data from api
         viewModelScope.launch {
             val result = getGamesUseCase.invoke()
-            _gameListViewState.value = when (result) {
-                is Result.Success -> GameListViewState(
-                    games = result.data
-                )
-                is Result.Error -> GameListViewState(
-                    errorMessage = result.exception.message ?: "An unexpected error occurred!"
-                )
-                is Result.Loading -> GameListViewState(
-                    isLoading = true
-                )
+            _gameListViewState.value.let { vs ->
+                when (result) {
+                    is Result.Success -> _gameListViewState.value =
+                        GameListViewState(games = result.data)
+
+                    is Result.Error -> {
+                        appendToMessageQueue(
+                            StateMessage(
+                                Response(
+                                    message = result.exception.message,
+                                    uiComponentType = UIComponentType.Dialog,
+                                    messageType = MessageType.Error
+                                )
+                            )
+                        )
+                    }
+
+                    is Result.Loading -> _gameListViewState.value = vs.copy(isLoading = true)
+                }
             }
         }
     }
 
+    private fun appendToMessageQueue(stateMessage: StateMessage) {
+        _stateMessageQueue.value.let {
+            if (stateMessage.doesNotAlreadyExistInQueue(it) &&
+                stateMessage.uiComponentTypeIsNotNone()
+            ) {
+                _stateMessageQueue.value = it.apply { add(stateMessage) }
+            }
+        }
+    }
 }

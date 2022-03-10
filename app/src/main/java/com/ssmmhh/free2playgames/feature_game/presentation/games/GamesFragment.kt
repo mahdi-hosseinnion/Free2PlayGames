@@ -80,12 +80,6 @@ class GamesFragment : Fragment() {
         //handle loading
         binding.swipeRefreshGameList.isRefreshing = vs.isLoading
 
-        //handle error
-        if (!vs.errorMessage.isNullOrBlank()) {
-            binding.txtGameListError.setVisibilityToVisible()
-            binding.recyclerGameList.setVisibilityToGone()
-            binding.txtGameListError.text = vs.errorMessage
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
