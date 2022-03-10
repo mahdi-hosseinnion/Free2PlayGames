@@ -1,10 +1,10 @@
 package com.ssmmhh.free2playgames.feature_game.presentation.games
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssmmhh.free2playgames.common.*
 import com.ssmmhh.free2playgames.feature_game.data.util.Result
-import com.ssmmhh.free2playgames.feature_game.domain.model.Game
 import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGamesUseCase
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +19,8 @@ class GamesViewModel
 constructor(
     private val getGamesUseCase: GetGamesUseCase
 ) : ViewModel() {
+
+    private val TAG = "GamesViewModel"
 
     private val _gameListViewState = MutableStateFlow(GameListViewState(isLoading = true))
     val gameListViewState: StateFlow<GameListViewState> = _gameListViewState
@@ -38,36 +40,56 @@ constructor(
         //retrieve data from api
         viewModelScope.launch {
             val result = getGamesUseCase.invoke()
-            _gameListViewState.value.let { vs ->
+            _gameListViewState.value = _gameListViewState.value.let { vs ->
                 when (result) {
-                    is Result.Success -> _gameListViewState.value =
-                        GameListViewState(games = result.data)
+                    is Result.Success -> GameListViewState(
+                        isLoading = false,
+                        games = result.data
+                    )
 
                     is Result.Error -> {
                         appendToMessageQueue(
                             StateMessage(
                                 Response(
-                                    message = result.exception.message,
-                                    uiComponentType = UIComponentType.Dialog,
+                                    message = result.exception.message
+                                        ?: "An unknown error occurred!",
+                                    uiComponentType = UIComponentType.TryAgainDialogForError(
+                                        tryAgain = { getGames() }
+                                    ),
                                     messageType = MessageType.Error
                                 )
                             )
                         )
+                        vs.copy(isLoading = false)
                     }
 
-                    is Result.Loading -> _gameListViewState.value = vs.copy(isLoading = true)
+                    is Result.Loading -> vs.copy(isLoading = true)
                 }
             }
         }
     }
 
-    private fun appendToMessageQueue(stateMessage: StateMessage) {
+    fun appendToMessageQueue(stateMessage: StateMessage) {
         _stateMessageQueue.value.let {
             if (stateMessage.doesNotAlreadyExistInQueue(it) &&
                 stateMessage.uiComponentTypeIsNotNone()
             ) {
-                _stateMessageQueue.value = it.apply { add(stateMessage) }
+                //TODO fix this problem(https://stackoverflow.com/a/66742924/10362460)
+                _stateMessageQueue.value = Queue(
+                    _stateMessageQueue.value.items.apply { add(stateMessage) }
+                )
             }
         }
+    }
+
+    fun removeHeadFromQueue() {
+        _stateMessageQueue.value = _stateMessageQueue.value.apply {
+            try {
+                remove()
+            } catch (e: Queue.QueueException) {
+                Log.d(TAG, "removeHeadFromQueue: Nothing to remove from messageQueue")
+            }
+        }
+
     }
 }

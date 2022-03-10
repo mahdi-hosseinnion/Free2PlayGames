@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssmmhh.free2playgames.R
+import com.ssmmhh.free2playgames.common.processQueue
 import com.ssmmhh.free2playgames.databinding.FragmentGamesBinding
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToGone
@@ -28,7 +29,7 @@ class GamesFragment : Fragment() {
         //on click on recycler item
         val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
             gameId = item.id,
-            gameTitle  = item.title
+            gameTitle = item.title
         )
         findNavController().navigate(action)
     }
@@ -64,9 +65,22 @@ class GamesFragment : Fragment() {
     private fun subscribeCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.gameListViewState.collect {
-                    handleRecyclerViewViewState(it)
+                launch {
+                    viewModel.gameListViewState.collect {
+                        handleRecyclerViewViewState(it)
+                    }
                 }
+                launch {
+                    viewModel.stateMessageQueue.collect {
+                        processQueue(
+                            this@GamesFragment.requireContext(),
+                            it,
+                        ) {
+                            viewModel.removeHeadFromQueue()
+                        }
+                    }
+                }
+
             }
         }
     }

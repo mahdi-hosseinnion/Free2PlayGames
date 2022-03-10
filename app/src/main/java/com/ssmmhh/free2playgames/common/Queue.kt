@@ -21,10 +21,10 @@ class Queue<T>(list: List<T>) {
         items.add(element)
     }
 
-    @Throws(Exception::class)
+    @Throws(QueueException::class)
     fun remove(): T {
         if (this.isEmpty()) {
-            throw Exception("fun 'remove' threw an exception: Nothing to remove from the queue.")
+            throw QueueException("fun 'remove' threw an exception: Nothing to remove from the queue.")
         } else {
             return items.removeAt(0)
         }
@@ -34,21 +34,16 @@ class Queue<T>(list: List<T>) {
         return items.remove(item)
     }
 
-    @Throws(Exception::class)
+    @Throws(QueueException::class)
     fun element(): T {
         if (this.isEmpty()) {
-            throw Exception("fun 'element' threw an exception: Nothing in the queue.")
+            throw QueueException("fun 'element' threw an exception: Nothing in the queue.")
         }
         return items[0]
     }
 
     fun offer(element: T): Boolean {
-        try {
-            items.add(element)
-        } catch (e: Exception) {
-            return false
-        }
-        return true
+        return items.add(element)
     }
 
     fun poll(): T? {
@@ -73,4 +68,5 @@ class Queue<T>(list: List<T>) {
         items.removeAll { true }
     }
 
+    class QueueException(message: String) : Exception(message)
 }

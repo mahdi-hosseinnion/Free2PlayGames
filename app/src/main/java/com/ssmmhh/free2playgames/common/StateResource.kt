@@ -16,12 +16,12 @@ sealed class UIComponentType {
 
     class AreYouSureDialog(
         val proceed: () -> Unit,
-        val cancel: () -> Unit,
+        val cancel: () -> Unit = {},
     ) : UIComponentType()
 
     class TryAgainDialogForError(
         val tryAgain: () -> Unit,
-        val cancel: () -> Unit,
+        val cancel: () -> Unit = {},
     ) : UIComponentType()
 
     object None : UIComponentType()
