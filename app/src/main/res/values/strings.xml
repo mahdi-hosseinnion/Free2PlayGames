@@ -22,4 +22,13 @@
     <string name="os">OS</string>
     <string name="Unknown">Unknown</string>
     <string name="navigate_back_cd">Navigate back</string>
+    <!--    Error handling text-->
+    <string name="text_error">Error</string>
+    <string name="text_success">Success</string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_info">Info</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="try_again">Try again</string>
+    <string name="text_yes">yes</string>
 </resources>

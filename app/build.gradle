@@ -67,6 +67,8 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     // Swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
+    // Afollestad Material-Dialogs
+    implementation "com.afollestad.material-dialogs:core:$meterial_dialogs_version"
 
     //** Test dependencies
     testImplementation "junit:junit:$junit_version"

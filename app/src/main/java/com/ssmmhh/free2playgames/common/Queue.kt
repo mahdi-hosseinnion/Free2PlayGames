@@ -56,6 +56,10 @@ class Queue<T>(list: List<T>) {
         return items.removeAt(0)
     }
 
+    /**
+     * Returns the head of queue (first element of list)
+     * If queue is empty returns null
+     */
     fun peek(): T? {
         if (this.isEmpty()) return null
         return items[0]
