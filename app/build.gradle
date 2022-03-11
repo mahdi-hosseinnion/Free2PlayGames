@@ -76,6 +76,9 @@ dependencies {
     //** Android test dependencies
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+
+    //** Debug dependencies
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 }
 //for hilt
 kapt {
