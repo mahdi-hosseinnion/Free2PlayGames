@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ssmmhh.free2playgames.R
+import com.ssmmhh.free2playgames.common.processQueue
 import com.ssmmhh.free2playgames.databinding.FragmentGameDetailBinding
 import com.ssmmhh.free2playgames.feature_game.domain.model.GameDetail
 import com.ssmmhh.free2playgames.feature_game.presentation.game_detail.viewstate.GameDetailViewState
@@ -135,6 +136,16 @@ class GameDetailFragment : Fragment() {
                         handleGameDetailViewState(it)
                     }
                 }
+                launch {
+                    viewModel.stateMessageQueue.collect {
+                        processQueue(
+                            this@GameDetailFragment.requireContext(),
+                            it,
+                        ) {
+                            viewModel.removeHeadFromQueue()
+                        }
+                    }
+                }
 
             }
         }
@@ -149,12 +160,6 @@ class GameDetailFragment : Fragment() {
     }
 
     private fun handleGameDetailViewState(vs: GameDetailViewState) {
-        vs.errorMessage?.let {
-            //some errors happened
-            binding.scrollMainGameDetail.setVisibilityToGone()
-            binding.txtGameDetailError.setVisibilityToVisible()
-            binding.txtGameDetailError.text = it
-        }
         //handle loading
         binding.swipeRefreshGameDetail.isRefreshing = vs.isLoading
         //handle data
