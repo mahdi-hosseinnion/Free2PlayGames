@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.ssmmhh.free2playgames.R
 
 private const val TAG = "AppDebug:UIExtensions"
+private const val DIALOG_CORNER_RADIUS: Float = 8F
 
 fun processQueue(
     context: Context,
@@ -122,6 +123,7 @@ private fun Context.displaySuccessDialog(
                 removeMessageFromQueue()
             }
             cancelable(true)
+            cornerRadius(DIALOG_CORNER_RADIUS)
         }
 }
 
@@ -138,6 +140,7 @@ private fun Context.displayErrorDialog(
                 dismiss()
             }
             cancelable(false)
+            cornerRadius(DIALOG_CORNER_RADIUS)
         }
 }
 
@@ -156,6 +159,7 @@ private fun Context.displayInfoDialog(
             onDismiss {
             }
             cancelable(false)
+            cornerRadius(DIALOG_CORNER_RADIUS)
         }
 }
 
@@ -182,6 +186,7 @@ private fun Context.areYouSureDialog(
             onDismiss {
             }
             cancelable(false)
+            cornerRadius(DIALOG_CORNER_RADIUS)
         }
 }
 
@@ -208,6 +213,7 @@ private fun Context.tryAgainDialogForError(
             onDismiss {
             }
             cancelable(false)
+            cornerRadius(DIALOG_CORNER_RADIUS)
         }
 }
 
