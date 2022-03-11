@@ -1,54 +1,55 @@
 package com.ssmmhh.free2playgames.common
 
+import android.util.Log
+
 
 /**
  * Kotlin version of a java.util Queue
  * https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html
  */
-class Queue<T>(list: List<T>) {
+class Queue<T>(initialItems: List<T> = emptyList()) {
 
-    var items: MutableList<T> = list.toMutableList()
+    private val _items: MutableList<T> = initialItems.toMutableList()
+    val items: List<T> = _items
 
-    fun isEmpty(): Boolean = items.isEmpty()
+
+    fun isEmpty(): Boolean = _items.isEmpty()
 
     fun isNotEmpty(): Boolean = !isEmpty()
 
-    fun count(): Int = items.count()
-
-    override fun toString() = items.toString()
+    fun count(): Int = _items.count()
 
     fun add(element: T) {
-        items.add(element)
+        _items.add(element)
     }
 
-    @Throws(QueueException::class)
-    fun remove(): T {
-        if (this.isEmpty()) {
-            throw QueueException("fun 'remove' threw an exception: Nothing to remove from the queue.")
+    fun remove(): T? {
+        return if (this.isEmpty()) {
+            null
         } else {
-            return items.removeAt(0)
+            _items.removeAt(0)
         }
     }
 
     fun remove(item: T): Boolean {
-        return items.remove(item)
+        return _items.remove(item)
     }
 
-    @Throws(QueueException::class)
-    fun element(): T {
+
+    fun element(): T? {
         if (this.isEmpty()) {
-            throw QueueException("fun 'element' threw an exception: Nothing in the queue.")
+            return null
         }
-        return items[0]
+        return _items[0]
     }
 
     fun offer(element: T): Boolean {
-        return items.add(element)
+        return _items.add(element)
     }
 
     fun poll(): T? {
         if (this.isEmpty()) return null
-        return items.removeAt(0)
+        return _items.removeAt(0)
     }
 
     /**
@@ -57,16 +58,30 @@ class Queue<T>(list: List<T>) {
      */
     fun peek(): T? {
         if (this.isEmpty()) return null
-        return items[0]
+        return _items[0]
     }
 
     fun addAll(queue: Queue<T>) {
-        this.items.addAll(queue.items)
+        this._items.addAll(queue.items)
     }
 
     fun clear() {
-        items.removeAll { true }
+        _items.removeAll { true }
     }
 
-    class QueueException(message: String) : Exception(message)
+    override fun toString() = "Queue: $_items"
+
+    override fun equals(other: Any?): Boolean {
+        if (other is Queue<*>) {
+            return _items == other._items
+        }
+        return false
+    }
+
+    override fun hashCode(): Int {
+        var result = _items.hashCode()
+        result = 31 * result + items.hashCode()
+        return result
+    }
+
 }

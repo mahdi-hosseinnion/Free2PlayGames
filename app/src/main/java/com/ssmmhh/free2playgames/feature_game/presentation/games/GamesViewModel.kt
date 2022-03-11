@@ -71,25 +71,25 @@ constructor(
 
     fun appendToMessageQueue(stateMessage: StateMessage) {
         _stateMessageQueue.value.let {
-            if (stateMessage.doesNotAlreadyExistInQueue(it) &&
+            if (stateMessage.doesNotAlreadyExistInQueue(it)
+                &&
                 stateMessage.uiComponentTypeIsNotNone()
             ) {
-                //TODO fix this problem(https://stackoverflow.com/a/66742924/10362460)
-                _stateMessageQueue.value = Queue(
-                    _stateMessageQueue.value.items.apply { add(stateMessage) }
-                )
+                //Create new queue b/c stateFlow won't emit the same value twice
+                //more-> (https://stackoverflow.com/a/66742924/10362460)
+                _stateMessageQueue.value = Queue<StateMessage>().apply {
+                    addAll(_stateMessageQueue.value)
+                    add(stateMessage)
+                }
             }
         }
     }
 
     fun removeHeadFromQueue() {
-        _stateMessageQueue.value = _stateMessageQueue.value.apply {
-            try {
-                remove()
-            } catch (e: Queue.QueueException) {
-                Log.d(TAG, "removeHeadFromQueue: Nothing to remove from messageQueue")
-            }
+        //Create new queue b/c stateFlow won't emit the same value twice
+        _stateMessageQueue.value = Queue<StateMessage>().apply {
+            addAll(_stateMessageQueue.value)
+            remove()
         }
-
     }
 }
