@@ -23,298 +23,281 @@
             app:titleTextColor="?colorOnPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_game_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/txt_game_detail_error"
+
+        <ScrollView
+            android:id="@+id/scroll_main_game_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="56dp"
-            android:gravity="center"
-            android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            android:visibility="gone"
-            tools:text="Something went wrong!" />
+            android:visibility="gone">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_game_detail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ScrollView
-                android:id="@+id/scroll_main_game_detail"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_detail_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vpg_game_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/game_thumbnail"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_layout_detail_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vpg_game_images">
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/vpg_game_images"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:contentDescription="@string/game_thumbnail"
-                        app:layout_constraintDimensionRatio="H,16:9"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <Button
+                        android:id="@+id/btn_profile_page"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="4dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/profile_page"
+                        app:layout_constraintEnd_toStartOf="@id/btn_play_now"
+                        app:layout_constraintHorizontal_weight="40"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <Button
+                        android:id="@+id/btn_play_now"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/play_now"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="60"
+                        app:layout_constraintStart_toEndOf="@id/btn_profile_page"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_game_description_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="32dp"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/material_on_surface_emphasis_high_type"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/vpg_game_images">
+                        app:layout_constraintTop_toBottomOf="@id/btn_play_now"
+                        tools:text="About Halo Infinite" />
 
-                        <Button
-                            android:id="@+id/btn_profile_page"
-                            android:layout_width="0dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="4dp"
-                            android:paddingTop="8dp"
-                            android:text="@string/profile_page"
-                            app:layout_constraintEnd_toStartOf="@id/btn_play_now"
-                            app:layout_constraintHorizontal_weight="40"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <View
+                        android:id="@+id/txt_game_description_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_description_header" />
 
-                        <Button
-                            android:id="@+id/btn_play_now"
-                            android:layout_width="0dp"
-                            android:layout_height="56dp"
-                            android:layout_marginStart="4dp"
-                            android:text="@string/play_now"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="60"
-                            app:layout_constraintStart_toEndOf="@id/btn_profile_page"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/txt_game_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/material_on_surface_emphasis_medium"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_description_line"
+                        tools:text="@string/dummy_text_description" />
 
-                        <TextView
-                            android:id="@+id/txt_game_description_header"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/material_on_surface_emphasis_high_type"
-                            android:textSize="26sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/btn_play_now"
-                            tools:text="About Halo Infinite" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_game_description" />
 
-                        <View
-                            android:id="@+id/txt_game_description_line"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_description_header" />
+                    <TextView
+                        android:id="@+id/txt_game_additional_information_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/additional_information"
+                        android:textColor="@color/material_on_surface_emphasis_high_type"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_description" />
 
-                        <TextView
-                            android:id="@+id/txt_game_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="?attr/selectableItemBackground"
-                            android:textColor="@color/material_on_surface_emphasis_medium"
-                            android:textSize="20sp"
-                            android:textStyle="normal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_description_line"
-                            tools:text="@string/dummy_text_description" />
+                    <View
+                        android:id="@+id/txt_game_additional_information_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_header" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_game_description" />
+                    <include
+                        android:id="@+id/game_title_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_developer_box"
+                        app:layout_constraintEnd_toStartOf="@+id/game_developer_box"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_line" />
 
-                        <TextView
-                            android:id="@+id/txt_game_additional_information_header"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/additional_information"
-                            android:textColor="@color/material_on_surface_emphasis_high_type"
-                            android:textSize="26sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_description" />
+                    <include
+                        android:id="@+id/game_developer_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_title_box"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toEndOf="@+id/game_title_box"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_line" />
 
-                        <View
-                            android:id="@+id/txt_game_additional_information_line"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_header" />
+                    <include
+                        android:id="@+id/game_publisher_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_release_date_box"
+                        app:layout_constraintEnd_toStartOf="@+id/game_release_date_box"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_title_box" />
 
-                        <include
-                            android:id="@+id/game_title_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_developer_box"
-                            app:layout_constraintEnd_toStartOf="@+id/game_developer_box"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_line" />
+                    <include
+                        android:id="@+id/game_release_date_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_publisher_box"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toEndOf="@+id/game_publisher_box"
+                        app:layout_constraintTop_toBottomOf="@id/game_developer_box" />
 
-                        <include
-                            android:id="@+id/game_developer_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_title_box"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toEndOf="@+id/game_title_box"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_additional_information_line" />
+                    <include
+                        android:id="@+id/game_genre_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_platform_box"
+                        app:layout_constraintEnd_toStartOf="@+id/game_platform_box"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_publisher_box" />
 
-                        <include
-                            android:id="@+id/game_publisher_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_release_date_box"
-                            app:layout_constraintEnd_toStartOf="@+id/game_release_date_box"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_title_box" />
+                    <include
+                        android:id="@+id/game_platform_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/game_genre_box"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toEndOf="@+id/game_genre_box"
+                        app:layout_constraintTop_toBottomOf="@id/game_release_date_box" />
 
-                        <include
-                            android:id="@+id/game_release_date_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_publisher_box"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toEndOf="@+id/game_publisher_box"
-                            app:layout_constraintTop_toBottomOf="@id/game_developer_box" />
+                    <TextView
+                        android:id="@+id/txt_game_minimum_system_requirements_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/minimum_system_requirements"
+                        android:textColor="@color/material_on_surface_emphasis_high_type"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_genre_box" />
 
-                        <include
-                            android:id="@+id/game_genre_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_platform_box"
-                            app:layout_constraintEnd_toStartOf="@+id/game_platform_box"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_publisher_box" />
+                    <View
+                        android:id="@+id/txt_game_minimum_system_requirements_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_minimum_system_requirements_header" />
 
-                        <include
-                            android:id="@+id/game_platform_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/game_genre_box"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="5"
-                            app:layout_constraintStart_toEndOf="@+id/game_genre_box"
-                            app:layout_constraintTop_toBottomOf="@id/game_release_date_box" />
+                    <include
+                        android:id="@+id/game_processor_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_game_minimum_system_requirements_line" />
 
-                        <TextView
-                            android:id="@+id/txt_game_minimum_system_requirements_header"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/minimum_system_requirements"
-                            android:textColor="@color/material_on_surface_emphasis_high_type"
-                            android:textSize="26sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_genre_box" />
-
-                        <View
-                            android:id="@+id/txt_game_minimum_system_requirements_line"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_minimum_system_requirements_header" />
-
-                        <include
-                            android:id="@+id/game_processor_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txt_game_minimum_system_requirements_line" />
-
-                        <include
-                            android:id="@+id/game_graphics_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_processor_box" />
+                    <include
+                        android:id="@+id/game_graphics_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_processor_box" />
 
 
-                        <include
-                            android:id="@+id/game_memory_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_graphics_box" />
+                    <include
+                        android:id="@+id/game_memory_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_graphics_box" />
 
-                        <include
-                            android:id="@+id/game_storage_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_memory_box" />
+                    <include
+                        android:id="@+id/game_storage_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_memory_box" />
 
-                        <include
-                            android:id="@+id/game_os_box"
-                            layout="@layout/layout_text_subtext_box"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/game_storage_box" />
+                    <include
+                        android:id="@+id/game_os_box"
+                        layout="@layout/layout_text_subtext_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/game_storage_box" />
 
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

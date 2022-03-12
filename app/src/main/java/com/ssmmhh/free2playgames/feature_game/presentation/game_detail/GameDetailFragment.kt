@@ -89,8 +89,6 @@ class GameDetailFragment : Fragment() {
     private fun setupSwipeToRefreshLayout() {
         binding.swipeRefreshGameDetail.setOnRefreshListener {
             viewModel.refreshGameDetail()
-            //hide error textView and its error
-            binding.txtGameDetailError.setVisibilityToGone()
         }
     }
 
@@ -165,7 +163,6 @@ class GameDetailFragment : Fragment() {
         //handle data
         vs.gameDetail?.let {
             binding.scrollMainGameDetail.setVisibilityToVisible()
-            binding.txtGameDetailError.setVisibilityToGone()
             setGameDetailValuesToTextViews(it)
         }
     }

@@ -56,8 +56,6 @@ class GamesFragment : Fragment() {
     private fun setupSwipeToRefreshLayout() {
         binding.swipeRefreshGameList.setOnRefreshListener {
             viewModel.refreshGames()
-            //hide error textView and its error
-            binding.txtGameListError.setVisibilityToGone()
         }
 
     }
@@ -87,7 +85,6 @@ class GamesFragment : Fragment() {
 
     private fun handleRecyclerViewViewState(vs: GameListViewState) {
         if (vs.games.isNotEmpty()) {
-            binding.txtGameListError.setVisibilityToGone()
             binding.recyclerGameList.setVisibilityToVisible()
             gamesRecyclerViewAdapter.submitList(vs.games)
         }
