@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بازی های رایگان</string>
+    <string name="game_thumbnail_image">عکس کاور بازی</string>
+    <string name="menu_refresh">بروزرسانی لیست</string>
+    <string name="game_thumbnail">عکس کاور بازی</string>
+    <string name="play_now">همین الان بازی کن</string>
+    <string name="dummy_text_description">For the first time ever, a free-to-play Halo experience is available in the form of Halo Infinite’s multiplayer. 343 Industries and Xbox Game Studios made the multiplayer version of the game available separately from the full story campaign, which is available to purchase for $60 to allow everyone to get in on the action. With the multiplayer, players can take part in two different modes: Arena and Big Team Battle. The first returns to Halo’s multiplayer roots with on-map equipment and 4-player squads. Big Team Battle allows players to mix and match weapons, vehicles and equipment to create a unique combat experience. The game also offers players the ability to customize their Spartan with cosmetic items. Of course, those with the campaign will have access to extra options. Even more can be found in the game’s battle pass which also introduces new modes and maps, as well as community-focused content.</string>
+    <string name="additional_information">اطلاعات بیشتر</string>
+    <string name="minimum_system_requirements">حداقل سیستم مورد نیاز</string>
+    <string name="profile_page">صفحه پروفایل</string>
+    <string name="about">درباره</string>
+    <string name="title">نام</string>
+    <string name="developer">توسعه دهنده</string>
+    <string name="publisher">منتشر کننده</string>
+    <string name="release_date">تاریخ انتشار</string>
+    <string name="genre">ژانر</string>
+    <string name="platform">بستر</string>
+    <string name="graphics">کارت گرافیک</string>
+    <string name="processor">پردازنده</string>
+    <string name="storage">حافظه</string>
+    <string name="memory">رَم</string>
+    <string name="os">سیستم عامل</string>
+    <string name="Unknown">نامعلوم</string>
+    <string name="navigate_back_cd">برگرد به عقب</string>
+    <!--    Error handling text-->
+    <string name="text_error">خطا</string>
+    <string name="text_success">موفق</string>
+    <string name="text_ok">باشه</string>
+    <string name="text_cancel">بی خیال</string>
+    <string name="text_info">اطلاعات</string>
+    <string name="are_you_sure">مطمئنی؟</string>
+    <string name="try_again">تلاش مجدد</string>
+    <string name="text_yes">بله</string>
+    <!--    Custom errors-->
+    <string name="unknown_error">یک خطای ناشناخته رخ داد!</string>
+    <string name="unable_to_retrieve_id_for_this_game">نمیتوانیم اطلاعات این بازی را دریافت کنیم\nبرگرد به صفحه قبل و دوباره امتحان کن</string>
+    <string name="NETWORK_TIMEOUT_ERROR">ارتباط با شبکه خیلی طول کشید!\nارتباط اینترنت خود را بررسی کنید</string>
+    <string name="NETWORK_UNKNOWN_ERROR">در حال ارتباط با شبکه یک اتفاقی غیر منتظره رخ داد\nارتباط اینترنت خود را بررسی کنید</string>
+    <string name="NETWORK_CONNECTION_ERROR">نمیتوان با شبکه ارتباط برقرار کرد\nارتباط اینترنت خود را بررسی کنید</string>
+</resources>
