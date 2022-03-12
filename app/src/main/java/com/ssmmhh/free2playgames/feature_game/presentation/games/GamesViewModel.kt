@@ -1,8 +1,10 @@
 package com.ssmmhh.free2playgames.feature_game.presentation.games
 
 import androidx.lifecycle.viewModelScope
+import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.common.*
 import com.ssmmhh.free2playgames.feature_game.data.util.Result
+import com.ssmmhh.free2playgames.feature_game.data.util.takeStringRes
 import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGamesUseCase
 import com.ssmmhh.free2playgames.feature_game.presentation.common.BaseViewModel
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
@@ -10,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,7 +45,7 @@ constructor(
                     )
 
                     is Result.Error -> {
-                        appendToMessageQueue(gameListError(message = result.exception.message))
+                        appendToMessageQueue(gameListError(exception = result.exception))
                         vs.copy(isLoading = false)
                     }
 
@@ -52,9 +55,9 @@ constructor(
         }
     }
 
-    private fun gameListError(message: String?): StateMessage = StateMessage(
+    private fun gameListError(exception: Exception): StateMessage = StateMessage(
         Response(
-            message = message ?: "An unknown error occurred!",
+            message = exception.takeStringRes(R.string.unknown_error),
             uiComponentType = UIComponentType.TryAgainDialogForError(
                 tryAgain = { getGames() }
             ),

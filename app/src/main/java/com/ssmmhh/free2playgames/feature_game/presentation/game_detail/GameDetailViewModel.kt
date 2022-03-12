@@ -2,11 +2,13 @@ package com.ssmmhh.free2playgames.feature_game.presentation.game_detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.common.MessageType
 import com.ssmmhh.free2playgames.common.Response
 import com.ssmmhh.free2playgames.common.StateMessage
 import com.ssmmhh.free2playgames.common.UIComponentType
 import com.ssmmhh.free2playgames.feature_game.data.util.Result
+import com.ssmmhh.free2playgames.feature_game.data.util.takeStringRes
 import com.ssmmhh.free2playgames.feature_game.domain.use_cases.GetGameDetailByIdUseCase
 import com.ssmmhh.free2playgames.feature_game.presentation.common.BaseViewModel
 import com.ssmmhh.free2playgames.feature_game.presentation.game_detail.viewstate.GameDetailViewState
@@ -90,7 +92,7 @@ constructor(
                         isLoading = false
                     )
                     is Result.Error -> {
-                        appendToMessageQueue(gameDetailError(message = result.exception.message))
+                        appendToMessageQueue(gameDetailError(result.exception))
                         vs.copy(isLoading = false)
                     }
                     is Result.Loading -> vs.copy(
@@ -101,9 +103,9 @@ constructor(
         }
     }
 
-    private fun gameDetailError(message: String?): StateMessage = StateMessage(
+    private fun gameDetailError(exception: Exception): StateMessage = StateMessage(
         Response(
-            message = message ?: "An unknown error occurred!",
+            message = exception.takeStringRes(R.string.unknown_error),
             uiComponentType = UIComponentType.TryAgainDialogForError(
                 tryAgain = {
                     getGameDetail()
@@ -117,7 +119,7 @@ constructor(
         appendToMessageQueue(
             StateMessage(
                 Response(
-                    message = "Unable to retrieve id for this game! \nnavigate back and try again!",
+                    message = R.string.unable_to_retrieve_id_for_this_game,
                     uiComponentType = UIComponentType.Dialog,
                     messageType = MessageType.Error
                 )

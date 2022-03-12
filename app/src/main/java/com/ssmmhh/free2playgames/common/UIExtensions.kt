@@ -105,13 +105,13 @@ private fun Context.displayDialog(
 
 
 private fun Context.displaySuccessDialog(
-    message: String,
+    @StringRes message: Int,
     removeMessageFromQueue: () -> Unit
 ) {
     MaterialDialog(this)
         .show {
             title(R.string.text_success)
-            message(text = message)
+            message(res = message)
             positiveButton(R.string.text_ok) {
                 removeMessageFromQueue()
                 dismiss()
@@ -128,13 +128,13 @@ private fun Context.displaySuccessDialog(
 }
 
 private fun Context.displayErrorDialog(
-    message: String,
+    @StringRes message: Int,
     removeMessageFromQueue: () -> Unit
 ) {
     MaterialDialog(this)
         .show {
             title(R.string.text_error)
-            message(text = message)
+            message(res = message)
             positiveButton(R.string.text_ok) {
                 removeMessageFromQueue()
                 dismiss()
@@ -145,13 +145,13 @@ private fun Context.displayErrorDialog(
 }
 
 private fun Context.displayInfoDialog(
-    message: String,
+    @StringRes message: Int,
     removeMessageFromQueue: () -> Unit
 ) {
     MaterialDialog(this)
         .show {
             title(R.string.text_info)
-            message(text = message)
+            message(res = message)
             positiveButton(R.string.text_ok) {
                 removeMessageFromQueue()
                 dismiss()
@@ -164,7 +164,7 @@ private fun Context.displayInfoDialog(
 }
 
 private fun Context.areYouSureDialog(
-    message: String,
+    @StringRes message: Int,
     proceed: () -> Unit,
     cancel: () -> Unit,
     removeMessageFromQueue: () -> Unit
@@ -172,7 +172,7 @@ private fun Context.areYouSureDialog(
     MaterialDialog(this)
         .show {
             title(R.string.are_you_sure)
-            message(text = message)
+            message(res = message)
             negativeButton(R.string.text_cancel) {
                 cancel()
                 removeMessageFromQueue()
@@ -191,7 +191,7 @@ private fun Context.areYouSureDialog(
 }
 
 private fun Context.tryAgainDialogForError(
-    message: String,
+    @StringRes message: Int,
     tryAgain: () -> Unit,
     cancel: () -> Unit,
     removeMessageFromQueue: () -> Unit
@@ -199,7 +199,7 @@ private fun Context.tryAgainDialogForError(
     MaterialDialog(this)
         .show {
             title(R.string.text_error)
-            message(text = message)
+            message(res = message)
             negativeButton(R.string.text_cancel) {
                 cancel()
                 removeMessageFromQueue()

@@ -1,10 +1,8 @@
 package com.ssmmhh.free2playgames.feature_game.data.util
 
 import android.util.Log
-import com.ssmmhh.free2playgames.feature_game.data.util.Constants.NETWORK_CONNECTION_ERROR
+import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.feature_game.data.util.Constants.NETWORK_TIMEOUT
-import com.ssmmhh.free2playgames.feature_game.data.util.Constants.NETWORK_TIMEOUT_ERROR
-import com.ssmmhh.free2playgames.feature_game.data.util.Constants.NETWORK_UNKNOWN_ERROR
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.TimeoutCancellationException
@@ -29,13 +27,13 @@ suspend fun <T> safeApiCall(
             }
         } catch (e: TimeoutCancellationException) {
             Log.e(API_TAG, "safeApiCall :TimeoutCancellationException: ${e.message}", e)
-            Result.Error(Exception(NETWORK_TIMEOUT_ERROR))
+            Result.Error(StringResException(R.string.NETWORK_TIMEOUT_ERROR))
         } catch (e: IOException) {
             Log.e(API_TAG, "safeApiCall :IOException: ${e.message}", e)
-            Result.Error(Exception(NETWORK_UNKNOWN_ERROR))
+            Result.Error(StringResException(R.string.NETWORK_UNKNOWN_ERROR))
         } catch (e: HttpException) {
             Log.e(API_TAG, "safeApiCall :HttpException: ${e.message}", e)
-            Result.Error(Exception(NETWORK_CONNECTION_ERROR))
+            Result.Error(StringResException(R.string.NETWORK_CONNECTION_ERROR))
         }
     }
 }

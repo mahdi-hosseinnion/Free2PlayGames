@@ -1,9 +1,11 @@
 package com.ssmmhh.free2playgames.common
 
+import androidx.annotation.StringRes
+
 data class StateMessage(val response: Response)
 
 data class Response(
-    val message: String,
+    @StringRes val message: Int,
     val uiComponentType: UIComponentType,
     val messageType: MessageType
 )
