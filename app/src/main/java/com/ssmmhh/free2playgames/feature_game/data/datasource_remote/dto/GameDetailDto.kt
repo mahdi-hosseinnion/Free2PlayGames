@@ -32,7 +32,7 @@ data class GameDetailDto(
     @SerializedName("freetogame_profile_url")
     val freeToGameProfileUrl: String,
     @SerializedName("minimum_system_requirements")
-    val minimumSystemRequirements: SystemRequirementsDto,
+    val minimumSystemRequirements: SystemRequirementsDto?,
     @SerializedName("screenshots")
     val screenshots: List<ScreenshotDto>
 )
@@ -51,6 +51,6 @@ fun GameDetailDto.toGameDetail(): GameDetail = GameDetail(
     developer = this.developer,
     releaseDate = this.releaseDate,
     freeToGameProfileUrl = this.freeToGameProfileUrl,
-    minimumSystemRequirements = this.minimumSystemRequirements.toSystemRequirements(),
+    minimumSystemRequirements = this.minimumSystemRequirements?.toSystemRequirements(),
     screenshots = this.screenshots.map { it.image },
 )

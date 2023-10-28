@@ -3,6 +3,9 @@
 /local.properties
 /.idea/shelf
 /.idea/caches
+/.idea/aws.xml
+/.idea/git_toolbox_prj.xml
+/.idea/inspectionProfiles
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml

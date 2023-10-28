@@ -37,4 +37,5 @@
     <string name="NETWORK_TIMEOUT_ERROR">Network call took too long!\nCheck your internet connection</string>
     <string name="NETWORK_UNKNOWN_ERROR">While making calls to the network something unexpected happened!\nCheck your internet connection</string>
     <string name="NETWORK_CONNECTION_ERROR">There is problem while connecting to the network! \nCheck your internet connection</string>
+    <string name="game_thumbnail_image_description">Game thumbnail image</string>
 </resources>

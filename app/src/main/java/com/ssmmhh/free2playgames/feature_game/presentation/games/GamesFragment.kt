@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -19,23 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.common.processQueue
 import com.ssmmhh.free2playgames.databinding.FragmentGamesBinding
+import com.ssmmhh.free2playgames.feature_game.domain.model.Game
 import com.ssmmhh.free2playgames.feature_game.presentation.games.viewstate.GameListViewState
-import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToGone
 import com.ssmmhh.free2playgames.feature_game.presentation.util.setVisibilityToVisible
+import com.ssmmhh.free2playgames.theme.Free2PlayGamesTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GamesFragment : Fragment() {
 
     private val gamesRecyclerViewAdapter = GameListRecyclerViewAdapter() { item, _ ->
-        //on click on recycler item
-        val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
-            gameId = item.id,
-            gameTitle = item.title
-        )
-        findNavController().navigate(action)
+
     }
 
     private val viewModel by viewModels<GamesViewModel>()
@@ -101,7 +93,6 @@ class GamesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
         subscribeCollectors()
-        binding.composeView.setContent {  HelloComponent() }
     }
 
     override fun onCreateView(
@@ -110,7 +101,15 @@ class GamesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentGamesBinding.inflate(inflater, container, false)
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                Free2PlayGamesTheme {
+                    GameListScreen(viewModel) { game ->
+                        navigateToDetailScreen(game)
+                    }
+                }
+            }
+        }
     }
 
     /*
@@ -140,10 +139,12 @@ class GamesFragment : Fragment() {
         _binding = null
     }
 
-    @Preview
-    @Composable
-    private fun HelloComponent(){
-        Text(text = "Hello compose!")
+    private fun navigateToDetailScreen(game: Game) {
+        //on click on recycler item
+        val action = GamesFragmentDirections.actionGamesFragmentToGameDetailFragment(
+            gameId = game.id,
+            gameTitle = game.title
+        )
+        findNavController().navigate(action)
     }
-
 }

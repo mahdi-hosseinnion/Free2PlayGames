@@ -14,6 +14,6 @@ data class GameDetail(
     val developer: String,
     val releaseDate: String,
     val freeToGameProfileUrl: String,
-    val minimumSystemRequirements: SystemRequirements,
+    val minimumSystemRequirements: SystemRequirements?,
     val screenshots: List<String>
 )

@@ -209,23 +209,23 @@ class GameDetailFragment : Fragment() {
 
         binding.gameOsBox.titleText.text = getString(R.string.os)
         binding.gameOsBox.subText.text =
-            gameDetail.minimumSystemRequirements.os ?: unknownText
+            gameDetail.minimumSystemRequirements?.os ?: unknownText
 
         binding.gameMemoryBox.titleText.text = getString(R.string.memory)
         binding.gameMemoryBox.subText.text =
-            gameDetail.minimumSystemRequirements.memory ?: unknownText
+            gameDetail.minimumSystemRequirements?.memory ?: unknownText
 
         binding.gameStorageBox.titleText.text = getString(R.string.storage)
         binding.gameStorageBox.subText.text =
-            gameDetail.minimumSystemRequirements.storage ?: unknownText
+            gameDetail.minimumSystemRequirements?.storage ?: unknownText
 
         binding.gameProcessorBox.titleText.text = getString(R.string.processor)
         binding.gameProcessorBox.subText.text =
-            gameDetail.minimumSystemRequirements.processor ?: unknownText
+            gameDetail.minimumSystemRequirements?.processor ?: unknownText
 
         binding.gameGraphicsBox.titleText.text = getString(R.string.graphics)
         binding.gameGraphicsBox.subText.text =
-            gameDetail.minimumSystemRequirements.graphics ?: unknownText
+            gameDetail.minimumSystemRequirements?.graphics ?: unknownText
 
 
     }
