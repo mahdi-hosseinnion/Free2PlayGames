@@ -6,6 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -98,7 +101,7 @@ class GamesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
         subscribeCollectors()
-
+        binding.composeView.setContent {  HelloComponent() }
     }
 
     override fun onCreateView(
@@ -137,5 +140,10 @@ class GamesFragment : Fragment() {
         _binding = null
     }
 
+    @Preview
+    @Composable
+    private fun HelloComponent(){
+        Text(text = "Hello compose!")
+    }
 
 }
