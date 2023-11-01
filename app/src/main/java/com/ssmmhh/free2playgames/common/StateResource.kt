@@ -18,12 +18,12 @@ sealed class UIComponentType {
 
     class AreYouSureDialog(
         val proceed: () -> Unit,
-        val cancel: () -> Unit = {},
+        val cancel: () -> Unit = {}
     ) : UIComponentType()
 
     class TryAgainDialogForError(
         val tryAgain: () -> Unit,
-        val cancel: () -> Unit = {},
+        val cancel: () -> Unit = {}
     ) : UIComponentType()
 
     object None : UIComponentType()
@@ -40,11 +40,8 @@ sealed class MessageType {
     object None : MessageType()
 }
 
-
 fun StateMessage.doesNotAlreadyExistInQueue(queue: Queue<StateMessage>): Boolean =
     !queue.items.contains(this)
 
 fun StateMessage.uiComponentTypeIsNotNone(): Boolean =
     (response.uiComponentType !is UIComponentType.None)
-
-

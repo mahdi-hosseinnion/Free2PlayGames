@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/gamesFragment"
-        android:name="com.ssmmhh.free2playgames.feature_game.presentation.games.GamesFragment"
+        android:name="com.ssmmhh.free2playgames.featureGame.presentation.games.GamesFragment"
         android:label="GamesFragment">
 
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
-        android:name="com.ssmmhh.free2playgames.feature_game.presentation.game_detail.GameDetailFragment"
+        android:name="com.ssmmhh.free2playgames.featureGame.presentation.gameDetail.GameDetailFragment"
         android:label="GameDetailFragment">
         <argument
             android:name="gameId"

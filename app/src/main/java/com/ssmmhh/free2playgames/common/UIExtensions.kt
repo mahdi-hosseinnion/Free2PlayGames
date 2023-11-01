@@ -25,13 +25,11 @@ fun processQueue(
     }
 }
 
-
 private fun Context.onResponseReceived(
     response: Response,
     removeMessageFromQueue: () -> Unit
 ) {
     when (response.uiComponentType) {
-
         is UIComponentType.AreYouSureDialog ->
             areYouSureDialog(
                 message = response.message,
@@ -59,7 +57,6 @@ private fun Context.onResponseReceived(
                 removeMessageFromQueue = removeMessageFromQueue
             )
 
-
         is UIComponentType.None -> {
             // This would be a good place to send to your Error Reporting
             // software of choice (ex: Firebase crash reporting)
@@ -69,12 +66,10 @@ private fun Context.onResponseReceived(
     }
 }
 
-
 private fun Context.displayDialog(
     response: Response,
     removeMessageFromQueue: () -> Unit
 ) = when (response.messageType) {
-
     is MessageType.Error -> {
         displayErrorDialog(
             message = response.message,
@@ -100,9 +95,7 @@ private fun Context.displayDialog(
         // do nothing
         removeMessageFromQueue()
     }
-
 }
-
 
 private fun Context.displaySuccessDialog(
     @StringRes message: Int,
@@ -232,5 +225,3 @@ fun Context.displayToast(
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     removeMessageFromQueue()
 }
-
-

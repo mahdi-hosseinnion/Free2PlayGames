@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature_game.presentation.games.GamesFragment">
+    tools:context=".featureGame.presentation.games.GamesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

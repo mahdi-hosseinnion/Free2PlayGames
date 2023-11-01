@@ -18,14 +18,14 @@ fun Free2PlayGamesTheme(
         primaryVariant = colorResource(id = R.color.purple_700),
         onPrimary = colorResource(id = R.color.white),
         secondary = colorResource(id = R.color.teal_200),
-        onSecondary = colorResource(id = R.color.black),
+        onSecondary = colorResource(id = R.color.black)
     )
     val darkColors = darkColors(
         primary = colorResource(id = R.color.purple_500),
         primaryVariant = colorResource(id = R.color.purple_700),
         onPrimary = colorResource(id = R.color.white),
         secondary = colorResource(id = R.color.teal_200),
-        onSecondary = colorResource(id = R.color.black),
+        onSecondary = colorResource(id = R.color.black)
     )
     val colors = if (darkTheme) darkColors else lightColors
     MaterialTheme(

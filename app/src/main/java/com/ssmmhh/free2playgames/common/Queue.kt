@@ -1,8 +1,5 @@
 package com.ssmmhh.free2playgames.common
 
-import android.util.Log
-
-
 /**
  * Kotlin version of a java.util Queue
  * https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html
@@ -11,7 +8,6 @@ class Queue<T>(initialItems: List<T> = emptyList()) {
 
     private val _items: MutableList<T> = initialItems.toMutableList()
     val items: List<T> = _items
-
 
     fun isEmpty(): Boolean = _items.isEmpty()
 
@@ -34,7 +30,6 @@ class Queue<T>(initialItems: List<T> = emptyList()) {
     fun remove(item: T): Boolean {
         return _items.remove(item)
     }
-
 
     fun element(): T? {
         if (this.isEmpty()) {
@@ -83,5 +78,4 @@ class Queue<T>(initialItems: List<T> = emptyList()) {
         result = 31 * result + items.hashCode()
         return result
     }
-
 }
