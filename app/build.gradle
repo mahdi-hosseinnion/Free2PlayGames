@@ -64,6 +64,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompat_version"
     implementation "androidx.activity:activity-compose:$activity_compose"
     implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.compose.material3:material3:$material_3_compose_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
