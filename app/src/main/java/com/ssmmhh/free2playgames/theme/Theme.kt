@@ -20,7 +20,8 @@ fun Free2PlayGamesTheme(
         onSecondary = colorResource(id = R.color.black),
         background = Color(0xFF1a2a3a),
         surface = Color(0xFF1f3a55),
-        onSurface = Color(0xFFFFFFFF)
+        onSurface = Color(0xFFFFFFFF),
+        outline = Color(0xFF426c95)
 
     )
     // CHip color: 3e6995
@@ -28,7 +29,11 @@ fun Free2PlayGamesTheme(
         primary = colorResource(id = R.color.purple_500),
         onPrimary = colorResource(id = R.color.white),
         secondary = colorResource(id = R.color.teal_200),
-        onSecondary = colorResource(id = R.color.black)
+        onSecondary = colorResource(id = R.color.black),
+        background = Color(0xFF1a2a3a),
+        surface = Color(0xFF1f3a55),
+        onSurface = Color(0xFFFFFFFF),
+        outline = Color(0xFF426c95)
     )
     val colors = if (darkTheme) darkColors else lightColors
     MaterialTheme(
@@ -36,4 +41,3 @@ fun Free2PlayGamesTheme(
         content = content
     )
 }
-val outlineColor = Color(0xFF426c95)

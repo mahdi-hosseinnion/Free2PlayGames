@@ -20,9 +20,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ssmmhh.free2playgames.R
-import com.ssmmhh.free2playgames.featureGame.components.GameItem
-import com.ssmmhh.free2playgames.featureGame.components.GameListAppBar
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
+import com.ssmmhh.free2playgames.featureGame.presentation.components.GameItem
+import com.ssmmhh.free2playgames.featureGame.presentation.components.GameListAppBar
 
 @Composable
 fun GameListScreen(games: List<Game>, onClickedOnGame: (id: Game) -> Unit) {

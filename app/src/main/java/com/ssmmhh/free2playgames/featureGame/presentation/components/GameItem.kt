@@ -1,4 +1,4 @@
-package com.ssmmhh.free2playgames.featureGame.components
+package com.ssmmhh.free2playgames.featureGame.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -21,13 +21,12 @@ import coil.compose.AsyncImage
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
 import com.ssmmhh.free2playgames.featureGame.domain.model.TempGame
-import com.ssmmhh.free2playgames.theme.outlineColor
 
 @Composable
 fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(2.dp, outlineColor),
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
         shadowElevation = 2.dp,
         modifier = modifier
             .padding(12.dp)
