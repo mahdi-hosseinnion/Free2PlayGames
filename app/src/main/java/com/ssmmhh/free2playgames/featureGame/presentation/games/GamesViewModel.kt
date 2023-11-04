@@ -1,7 +1,8 @@
 package com.ssmmhh.free2playgames.featureGame.presentation.games
 
 import androidx.lifecycle.viewModelScope
-import com.ssmmhh.free2playgames.featureGame.data.util.getDataIfSucceeded
+import com.ssmmhh.free2playgames.featureGame.data.util.Result
+import com.ssmmhh.free2playgames.featureGame.domain.model.NetworkError
 import com.ssmmhh.free2playgames.featureGame.domain.useCases.GetGamesUseCase
 import com.ssmmhh.free2playgames.featureGame.presentation.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,6 +10,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -22,14 +24,20 @@ constructor(
     val gameListUiState: StateFlow<GameListUiState> = _gameListUiState
 
     init {
-        getGames()
+        fetchGames()
     }
 
-    private fun getGames() {
-        _gameListUiState.value = GameListUiState.Loading
+    private fun fetchGames() {
+        _gameListUiState.update { GameListUiState.Loading }
         viewModelScope.launch(Dispatchers.IO) {
-            _gameListUiState.value =
-                GameListUiState.HasGames(getGamesUseCase.invoke().getDataIfSucceeded()!!)
+            val requestResult = getGamesUseCase.invoke()
+            _gameListUiState.update {
+                if (requestResult is Result.Success) {
+                    GameListUiState.HasGames(requestResult.data)
+                } else {
+                    GameListUiState.Failed(error = NetworkError.UNKNOWN, retry = { fetchGames() })
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.ssmmhh.free2playgames.featureGame.presentation.games
 
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
+import com.ssmmhh.free2playgames.featureGame.domain.model.NetworkError
 
 sealed interface GameListUiState {
 
@@ -9,4 +10,9 @@ sealed interface GameListUiState {
     ) : GameListUiState
 
     data object Loading : GameListUiState
+
+    data class Failed(
+        val error: NetworkError,
+        val retry: () -> Unit
+    ) : GameListUiState
 }

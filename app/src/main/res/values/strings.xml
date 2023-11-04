@@ -38,4 +38,6 @@
     <string name="NETWORK_UNKNOWN_ERROR">While making calls to the network something unexpected happened!\nCheck your internet connection</string>
     <string name="NETWORK_CONNECTION_ERROR">There is problem while connecting to the network! \nCheck your internet connection</string>
     <string name="game_thumbnail_image_description">Game thumbnail image</string>
+    <string name="retry">Retry</string>
+    <string name="network_error_message">Unable to fetch games.\nCheck your network connection and try again.</string>
 </resources>

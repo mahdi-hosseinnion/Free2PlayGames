@@ -34,3 +34,7 @@ val Result<*>.succeededAndDataIsNotNull
     get() = this is Success && data != null
 
 fun <T> Result<T>.getDataIfSucceeded(): T? = if (this is Success) this.data else null
+
+fun <T> Result<T>.successOr(fallback: T): T {
+    return (this as? Result.Success<T>)?.data ?: fallback
+}

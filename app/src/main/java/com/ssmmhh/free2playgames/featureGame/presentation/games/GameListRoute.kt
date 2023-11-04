@@ -15,6 +15,7 @@ fun GameListRoute(viewModel: GamesViewModel, onSelectGame: (Game) -> Unit) {
 fun GameListRoute(uiState: GameListUiState, onSelectGame: (Game) -> Unit) {
     when (uiState) {
         is GameListUiState.HasGames -> GameListScreen(uiState.gameList, onSelectGame)
+        is GameListUiState.Failed -> GameErrorScreen(retry = uiState.retry)
         GameListUiState.Loading -> GameLoadingScreen()
     }
 }
