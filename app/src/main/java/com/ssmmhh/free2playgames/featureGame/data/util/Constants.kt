@@ -1,5 +1,8 @@
 package com.ssmmhh.free2playgames.featureGame.data.util
 
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
 object Constants {
-    const val NETWORK_TIMEOUT: Long = 5_000
+    val NETWORK_TIMEOUT: Duration = 10.seconds
 }

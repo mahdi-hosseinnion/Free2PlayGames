@@ -1,5 +1,6 @@
 package com.ssmmhh.free2playgames.featureGame.presentation.games
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,12 +31,15 @@ import coil.compose.AsyncImage
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
 import com.ssmmhh.free2playgames.featureGame.domain.model.TempGame
+import com.ssmmhh.free2playgames.theme.outlineColor
 
 @Composable
 fun GameListScreen(games: List<Game>, onClickedOnGame: (id: Game) -> Unit) {
-    LazyColumn {
-        items(items = games, key = { it.id }) {
-            GameItem(game = it, onClickedOnGame = onClickedOnGame)
+    Surface(color = MaterialTheme.colors.background) {
+        LazyColumn {
+            items(items = games, key = { it.id }) {
+                GameItem(game = it, onClickedOnGame = onClickedOnGame)
+            }
         }
     }
 }
@@ -42,10 +47,11 @@ fun GameListScreen(games: List<Game>, onClickedOnGame: (id: Game) -> Unit) {
 @Composable
 fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier = Modifier) {
     Surface(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_medium)),
+        shape = RoundedCornerShape(16.dp),
+        border = BorderStroke(2.dp, outlineColor),
         elevation = 2.dp,
         modifier = modifier
-            .padding(dimensionResource(id = R.dimen.padding_large))
+            .padding(12.dp)
             .clickable {
                 onClickedOnGame.invoke(game)
             }
@@ -53,22 +59,35 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
         Column {
             AsyncImage(
                 model = game.thumbnail,
-                modifier = Modifier.aspectRatio(1.77F),
+                modifier = Modifier.padding(2.dp).aspectRatio(1.77F).clip(
+                    RoundedCornerShape(14.dp)
+                ),
+                filterQuality = FilterQuality.Medium,
                 contentDescription = stringResource(R.string.game_thumbnail_image_description),
                 onState = {
                 }
             )
-            val sp = dimensionResource(id = R.dimen.padding_small)
+            val padding = 8.dp
             Text(
                 text = game.title,
                 style = MaterialTheme.typography.h5,
-                modifier = Modifier.padding(sp),
+                modifier = Modifier.padding(
+                    start = padding,
+                    top = padding / 2,
+                    end = padding,
+                    bottom = padding
+                ),
                 maxLines = 1
             )
             Text(
                 text = game.shortDescription,
                 maxLines = 2,
-                modifier = Modifier.padding(start = sp, top = 0.dp, end = sp, bottom = sp),
+                modifier = Modifier.padding(
+                    start = padding,
+                    top = 0.dp,
+                    end = padding,
+                    bottom = padding
+                ),
                 style = MaterialTheme.typography.body1,
                 overflow = TextOverflow.Ellipsis
             )
