@@ -1,9 +1,8 @@
 package com.ssmmhh.free2playgames.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -14,9 +13,8 @@ fun Free2PlayGamesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val lightColors = lightColors(
+    val lightColors = lightColorScheme(
         primary = colorResource(id = R.color.purple_500),
-        primaryVariant = colorResource(id = R.color.purple_700),
         onPrimary = colorResource(id = R.color.white),
         secondary = colorResource(id = R.color.teal_200),
         onSecondary = colorResource(id = R.color.black),
@@ -26,16 +24,15 @@ fun Free2PlayGamesTheme(
 
     )
     // CHip color: 3e6995
-    val darkColors = darkColors(
+    val darkColors = lightColorScheme(
         primary = colorResource(id = R.color.purple_500),
-        primaryVariant = colorResource(id = R.color.purple_700),
         onPrimary = colorResource(id = R.color.white),
         secondary = colorResource(id = R.color.teal_200),
         onSecondary = colorResource(id = R.color.black)
     )
     val colors = if (darkTheme) darkColors else lightColors
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         content = content
     )
 }
