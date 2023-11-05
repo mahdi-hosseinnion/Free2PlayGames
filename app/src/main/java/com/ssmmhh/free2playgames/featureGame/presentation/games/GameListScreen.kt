@@ -13,6 +13,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,6 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
+import com.ssmmhh.free2playgames.featureGame.domain.model.text
+import com.ssmmhh.free2playgames.featureGame.presentation.components.FilterBottomSheet
+import com.ssmmhh.free2playgames.featureGame.presentation.components.FilterOptions
 import com.ssmmhh.free2playgames.featureGame.presentation.components.GameItem
 import com.ssmmhh.free2playgames.featureGame.presentation.components.GameListAppBar
 
@@ -28,11 +35,21 @@ import com.ssmmhh.free2playgames.featureGame.presentation.components.GameListApp
 fun GameListScreen(games: List<Game>, onClickedOnGame: (id: Game) -> Unit) {
     Surface(color = MaterialTheme.colorScheme.background) {
         Column {
-            GameListAppBar() { padding ->
+            var activeFilterBottomSheet by remember { mutableStateOf<FilterOptions?>(null) }
+            GameListAppBar(
+                onFilterClicked = {
+                    activeFilterBottomSheet = FilterOptions.Sort
+                }
+
+            ) { padding ->
                 LazyColumn(contentPadding = padding) {
                     items(items = games, key = { it.id }) {
                         GameItem(game = it, onClickedOnGame = onClickedOnGame)
                     }
+                }
+
+                FilterBottomSheet(filterOptions = activeFilterBottomSheet) {
+                    activeFilterBottomSheet = null
                 }
             }
         }

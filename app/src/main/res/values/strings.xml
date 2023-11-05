@@ -40,4 +40,8 @@
     <string name="game_thumbnail_image_description">Game thumbnail image</string>
     <string name="retry">Retry</string>
     <string name="network_error_message">Unable to fetch games.\nCheck your network connection and try again.</string>
+    <string name="sort">Sort</string>
+    <string name="popularity">Popularity</string>
+    <string name="alphabetical">Alphabetical</string>
+    <string name="relevance">Relevance</string>
 </resources>

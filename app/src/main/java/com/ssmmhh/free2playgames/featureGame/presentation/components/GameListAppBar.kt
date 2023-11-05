@@ -13,22 +13,19 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ssmmhh.free2playgames.R
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun GameListAppBar(
     modifier: Modifier = Modifier,
+    onFilterClicked: () -> Unit,
     scrollContent: @Composable (innerPadding: PaddingValues) -> Unit = {}
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -54,12 +51,10 @@ fun GameListAppBar(
                         },
                         scrollBehavior = scrollBehavior
                     )
-                    var selectedFilter by remember { mutableIntStateOf(0) }
                     FilterChip(
                         modifier = Modifier.padding(start = 12.dp),
-                        filterOptions = listOf("Popular", "Kanye", "sensation"),
-                        selectedFilterIndex = selectedFilter,
-                        onFilterSelected = { selectedFilter = it }
+                        text = stringResource(R.string.sort),
+                        onClick = onFilterClicked
                     )
                 }
             }
