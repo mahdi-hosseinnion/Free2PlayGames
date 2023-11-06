@@ -20,12 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ssmmhh.free2playgames.R
+import com.ssmmhh.free2playgames.featureGame.domain.model.GameSortOptions
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameListAppBar(
     modifier: Modifier = Modifier,
     onFilterClicked: () -> Unit,
+    selectedSortOption: GameSortOptions,
     scrollContent: @Composable (innerPadding: PaddingValues) -> Unit = {}
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -53,7 +55,10 @@ fun GameListAppBar(
                     )
                     FilterChip(
                         modifier = Modifier.padding(start = 12.dp),
-                        text = stringResource(R.string.sort),
+                        text = stringResource(
+                            R.string.sorted_by,
+                            stringResource(selectedSortOption.textRes)
+                        ),
                         onClick = onFilterClicked
                     )
                 }

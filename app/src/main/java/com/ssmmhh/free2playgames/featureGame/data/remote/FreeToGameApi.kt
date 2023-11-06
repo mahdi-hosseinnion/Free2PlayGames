@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface FreeToGameApi {
 
     @GET("games")
-    suspend fun getGames(): List<GameDto>
+    suspend fun getGames(@Query("sort-by") sort: String?): List<GameDto>
 
     @GET("game")
     suspend fun getGameDetailById(

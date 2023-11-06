@@ -19,28 +19,39 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ssmmhh.free2playgames.R
 import com.ssmmhh.free2playgames.featureGame.domain.model.Game
-import com.ssmmhh.free2playgames.featureGame.domain.model.text
+import com.ssmmhh.free2playgames.featureGame.domain.model.GameSortOptions
 import com.ssmmhh.free2playgames.featureGame.presentation.components.FilterBottomSheet
-import com.ssmmhh.free2playgames.featureGame.presentation.components.FilterOptions
 import com.ssmmhh.free2playgames.featureGame.presentation.components.GameItem
 import com.ssmmhh.free2playgames.featureGame.presentation.components.GameListAppBar
+import com.ssmmhh.free2playgames.featureGame.presentation.components.SortAndFilterEditor
 
 @Composable
-fun GameListScreen(games: List<Game>, onClickedOnGame: (id: Game) -> Unit) {
+fun GameListScreen(
+    games: List<Game>,
+    onClickedOnGame: (id: Game) -> Unit,
+    selectedSortOption: GameSortOptions,
+    onSortOptionChanged: (GameSortOptions) -> Unit
+) {
+    val context = LocalContext.current
     Surface(color = MaterialTheme.colorScheme.background) {
         Column {
-            var activeFilterBottomSheet by remember { mutableStateOf<FilterOptions?>(null) }
+            var activeFilterBottomSheet by remember { mutableStateOf<SortAndFilterEditor?>(null) }
             GameListAppBar(
+                selectedSortOption = selectedSortOption,
                 onFilterClicked = {
-                    activeFilterBottomSheet = FilterOptions.Sort
+                    activeFilterBottomSheet = SortAndFilterEditor.Sort(
+                        context = context,
+                        selectedOption = selectedSortOption,
+                        onOptionSelected = onSortOptionChanged
+                    )
                 }
-
             ) { padding ->
                 LazyColumn(contentPadding = padding) {
                     items(items = games, key = { it.id }) {

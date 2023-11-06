@@ -44,4 +44,6 @@
     <string name="popularity">Popularity</string>
     <string name="alphabetical">Alphabetical</string>
     <string name="relevance">Relevance</string>
+    <string name="newest">Newest</string>
+    <string name="sorted_by">Sorted by %s</string>
 </resources>
