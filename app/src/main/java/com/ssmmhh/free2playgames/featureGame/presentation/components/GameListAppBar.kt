@@ -35,17 +35,16 @@ fun GameListAppBar(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            Surface(shadowElevation = 2.dp) {
+            Surface(shadowElevation = 2.dp, color = MaterialTheme.colorScheme.primaryContainer) {
                 Column {
                     CenterAlignedTopAppBar(
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primary, // TODO (Use priamry container)
-                            titleContentColor = MaterialTheme.colorScheme.onPrimary
+                            containerColor = MaterialTheme.colorScheme.primaryContainer, // TODO (Use priamry container)
+                            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         ),
                         title = {
                             Text(
                                 text = stringResource(id = R.string.app_name),
-                                color = MaterialTheme.colorScheme.onPrimary,
                                 style = MaterialTheme.typography.titleLarge,
                                 overflow = TextOverflow.Ellipsis,
                                 maxLines = 1
@@ -54,7 +53,7 @@ fun GameListAppBar(
                         scrollBehavior = scrollBehavior
                     )
                     FilterChip(
-                        modifier = Modifier.padding(start = 12.dp),
+                        modifier = Modifier.padding(start = 12.dp, top = 2.dp, bottom = 2.dp),
                         text = stringResource(
                             R.string.sorted_by,
                             stringResource(selectedSortOption.textRes)

@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.FilterQuality
@@ -26,8 +27,9 @@ import com.ssmmhh.free2playgames.featureGame.domain.model.TempGame
 fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
-        shadowElevation = 2.dp,
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        shadowElevation = 0.dp,
         modifier = modifier
             .padding(12.dp)
             .clickable {
@@ -38,7 +40,7 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
             AsyncImage(
                 model = game.thumbnail,
                 modifier = Modifier
-                    .padding(2.dp)
+                    .padding(1.dp)
                     .aspectRatio(1.77F)
                     .clip(
                         RoundedCornerShape(14.dp)
@@ -48,7 +50,7 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
                 onState = {
                 }
             )
-            val padding = 8.dp
+            val padding = 12.dp
             Text(
                 text = game.title,
                 style = MaterialTheme.typography.titleLarge,
@@ -56,7 +58,7 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
                     start = padding,
                     top = padding / 2,
                     end = padding,
-                    bottom = padding
+                    bottom = padding / 2
                 ),
                 maxLines = 1
             )
@@ -67,7 +69,7 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
                     start = padding,
                     top = 0.dp,
                     end = padding,
-                    bottom = padding * 1.5f
+                    bottom = padding * 1f
                 ),
                 style = MaterialTheme.typography.bodyMedium,
                 overflow = TextOverflow.Ellipsis
@@ -79,6 +81,6 @@ fun GameItem(game: Game, onClickedOnGame: (id: Game) -> Unit, modifier: Modifier
 @Preview
 @Composable
 private fun PreviewGameItem() {
-    val game = TempGame()
+    val game = remember { TempGame() }
     GameItem(game = game, {})
 }
