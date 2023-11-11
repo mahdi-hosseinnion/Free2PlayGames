@@ -36,9 +36,9 @@ fun Free2PlayGamesTheme(
         onSurface = Color(0xFFFFFFFF),
         outline = Color(0xFF426c95)
     )
-    val colors = if (darkTheme) darkColors else lightColors
+    val colors = if (darkTheme) darkColorScheme() else lightColorScheme()
     MaterialTheme(
-        colorScheme = darkColorScheme(),
+        colorScheme = colors,
         content = content
     )
 }

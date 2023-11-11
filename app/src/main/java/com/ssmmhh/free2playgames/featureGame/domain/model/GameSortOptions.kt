@@ -8,10 +8,10 @@ import com.ssmmhh.free2playgames.R
 enum class GameSortOptions(
     @StringRes val textRes: Int
 ) {
-    RELEASE_DATE(R.string.newest),
+    RELEVANCE(R.string.relevance),
     POPULARITY(R.string.popularity),
-    ALPHABETICAL(R.string.alphabetical),
-    RELEVANCE(R.string.relevance);
+    RELEASE_DATE(R.string.newest),
+    ALPHABETICAL(R.string.alphabetical);
 
     companion object
 }

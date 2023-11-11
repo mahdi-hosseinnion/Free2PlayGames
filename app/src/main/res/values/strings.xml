@@ -46,4 +46,6 @@
     <string name="relevance">Relevance</string>
     <string name="newest">Newest</string>
     <string name="sorted_by">Sorted by %s</string>
+    <string name="sorted_by_">"Sorted by "</string>
+    <string name="cancel">Cancel</string>
 </resources>

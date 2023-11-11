@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
@@ -43,8 +44,15 @@ fun FilterBottomSheet(
     if (filterOptions == null) return
     if (filterOptions !is SortAndFilterEditor.Sort) return
     val scope = rememberCoroutineScope()
-
     val sheetState: SheetState = rememberModalBottomSheetState()
+
+    fun hideBottomSheet() {
+        scope.launch {
+            sheetState.hide()
+            onDismissRequest()
+        }
+    }
+
     ModalBottomSheet(
         sheetState = sheetState,
         onDismissRequest = onDismissRequest
@@ -54,10 +62,10 @@ fun FilterBottomSheet(
             selectedOption = filterOptions.selectedOption,
             onSortOptionSelected = {
                 filterOptions.onOptionSelected.invoke(it)
-                scope.launch {
-                    sheetState.hide()
-                    onDismissRequest()
-                }
+                hideBottomSheet()
+            },
+            onDismissRequest = {
+                hideBottomSheet()
             }
         )
     }
@@ -67,9 +75,26 @@ fun FilterBottomSheet(
 fun SortOptionsSelector(
     allOptions: List<GameSortOptions>,
     selectedOption: GameSortOptions,
-    onSortOptionSelected: (GameSortOptions) -> Unit
+    onSortOptionSelected: (GameSortOptions) -> Unit,
+    onDismissRequest: () -> Unit
 ) {
-    Column(modifier = Modifier.padding(24.dp)) {
+    Column(
+        modifier = Modifier.padding(
+            start = 8.dp,
+            top = 0.dp,
+            end = 8.dp,
+            bottom = 8.dp
+        )
+    ) {
+        Text(
+            text = stringResource(R.string.sorted_by_),
+            modifier = Modifier.padding(
+                start = 8.dp,
+                top = 0.dp,
+                end = 8.dp,
+                bottom = 8.dp
+            )
+        )
         allOptions.forEach { option ->
             Row(
                 modifier = Modifier
@@ -87,6 +112,19 @@ fun SortOptionsSelector(
                     modifier = Modifier.align(alignment = Alignment.CenterVertically)
                 )
             }
+        }
+        OutlinedButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = 8.dp,
+                    top = 16.dp,
+                    end = 8.dp,
+                    bottom = 24.dp
+                ),
+            onClick = onDismissRequest
+        ) {
+            Text(stringResource(R.string.cancel))
         }
     }
 }

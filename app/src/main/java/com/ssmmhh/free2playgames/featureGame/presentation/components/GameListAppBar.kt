@@ -40,7 +40,7 @@ fun GameListAppBar(
                     CenterAlignedTopAppBar(
                         colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer, // TODO (Use priamry container)
-                            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            titleContentColor = MaterialTheme.colorScheme.onSurface
                         ),
                         title = {
                             Text(
